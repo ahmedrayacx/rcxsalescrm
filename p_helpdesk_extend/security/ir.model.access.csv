@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_department_admin,access.helpdesk.department.admin,model_helpdesk_department,base.group_system,1,1,1,1
+access_helpdesk_project_admin,access.helpdesk.project.admin,model_helpdesk_project,base.group_system,1,1,1,1
+access_helpdesk_subtype_admin,access.helpdesk.subtype.admin,model_helpdesk_subtype,base.group_system,1,1,1,1
+access_helpdesk_email_notif_admin,access.helpdesk.email.notif.admin,model_helpdesk_email_notif,base.group_system,1,1,1,1
+access_helpdesk_department_user,access.helpdesk.department.user,model_helpdesk_department,base.group_user,1,0,0,0
+access_helpdesk_project_user,access.helpdesk.project.user,model_helpdesk_project,base.group_user,1,0,0,0
+access_helpdesk_subtype_user,access.helpdesk.subtype.user,model_helpdesk_subtype,base.group_user,1,0,0,0
+access_helpdesk_email_notif_user,access.helpdesk.email.notif.user,model_helpdesk_email_notif,base.group_user,1,0,0,0
