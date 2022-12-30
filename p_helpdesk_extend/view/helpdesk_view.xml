@@ -15,6 +15,7 @@
                            options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
                     <field name="unit_number"/>
                     <field name="case_code"/>
+		    <field name="test_bool" widget="boolean_toggle"/>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="attributes">
                     <attribute name="required">1</attribute>
