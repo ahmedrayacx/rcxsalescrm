@@ -27,6 +27,8 @@ class Helpdesk_ticket(models.Model):
         "Case Code"
     )
 
+    test_bool = fields.Boolean(string="test bool",default=False)
+
     @api.model
     def create(self, vals):
         call_super = super(Helpdesk_ticket, self).create(vals)
