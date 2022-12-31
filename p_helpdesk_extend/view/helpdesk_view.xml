@@ -25,7 +25,7 @@
 					</group>
 					
 				</xpath>
-				<xpath expr="//field[@name='ticket_type_id']" postion="replace" />
+				<xpath expr="//field[@name='ticket_type_id']" position="replace" />
 					
 				
                 
