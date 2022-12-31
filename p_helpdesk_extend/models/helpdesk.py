@@ -4,21 +4,21 @@ from odoo import models, fields, api
 class Helpdesk_ticket(models.Model):
     _inherit = 'helpdesk.ticket'
     is_IT=fields.Boolean(compute='compute_is_IT')
-    CodeName = fields.Char("Code Name")
+    codeName = fields.Char("Code Name")
     project = fields.Selection([('new', 'New'), ('existed', 'Existed')], string='Project')
     voice = fields.Boolean(string="Voice",default=False)
-    ChatBot = fields.Boolean(string="ChatBot",default=False)
-    SmartIVR = fields.Boolean(string="Smart IVR",default=False)
-    IVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
-    Transactions = fields.Selection(
+    chatBot = fields.Boolean(string="ChatBot",default=False)
+    smartIVR = fields.Boolean(string="Smart IVR",default=False)
+    iVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
+    transactions = fields.Selection(
         [('inbound', 'Inbound'), ('outbound', 'Outbound'), ('inbound&outbound', 'Inbound-Outbound')],string='Transactions')
-    NumberofLicenses= fields.Char(
+    numberofLicenses= fields.Char(
         "Number of Licenses / Ports"
     )
-    Attachment = fields.Binary(string='Attachment')
-    WhatsApp = fields.Boolean(string="WhatsApp",default=False)
-    Facebook = fields.Boolean(string="Facebook",default=False)
-    WebChat = fields.Boolean(string="WebChat",default=False)
+    attachment = fields.Binary(string='Attachment')
+    whatsApp = fields.Boolean(string="WhatsApp",default=False)
+    facebook = fields.Boolean(string="Facebook",default=False)
+    webChat = fields.Boolean(string="WebChat",default=False)
    
    
    
