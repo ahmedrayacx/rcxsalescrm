@@ -4,36 +4,116 @@ from odoo import models, fields, api
 class Helpdesk_ticket(models.Model):
     _inherit = 'helpdesk.ticket'
 
-    CodeName=fields.Char("Code Name")
-    Project = fields.Selection([("New","New")],("Existed","Existed")])
-   
-    
-
-    Voice = fields.Boolean(string="Voice",default=False)
-    ChatBot = fields.Boolean(string="ChatBot",default=False)
-    SmartIVR = fields.Boolean(string="Smart IVR",default=False)
-    IVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
-    Transactions = fields.Selection(
-        [('Inbound', 'Inbound'), ('Outbound', 'Outbound'), ('Inbound&Outbound', 'Inbound-Outbound'))
-    NumberofLicenses= fields.Char(
-        "Number of Licenses / Ports"
+    help_depart_id = fields.Many2one(
+        'helpdesk.department',
+        string="Department"
     )
-    Attachment = fields.Binary()
-    WhatsApp = fields.Boolean(string="WhatsApp",default=False)
-    Facebook = fields.Boolean(string="Facebook",default=False)
-    WebChat = fields.Boolean(string="WebChat",default=False)
-   
+    help_project_id = fields.Many2one(
+        'helpdesk.project',
+        string="Project"
+    )
+    help_subtype_id = fields.Many2one(
+        'helpdesk.subtype',
+        string="Sub-Type"
+    )
+    help_email_id = fields.Many2one(
+        'helpdesk.email.notif',
+        string="Email Notification"
+    )
+    unit_number = fields.Char(
+        "Unit Number"
+    )
+    case_code = fields.Char(
+        "Case Code"
+    )
+
+    test_bool = fields.Boolean(string="test bool",default=False)
+
+    @api.model
+    def create(self, vals):
+        call_super = super(Helpdesk_ticket, self).create(vals)
+        for rec in call_super:
+            if rec.help_depart_id:
+                email_values = {
+                    'email_to': rec.help_depart_id.email_to,
+                    'email_cc': rec.help_depart_id.email_cc,
+                }
+                rec.help_depart_id.template_id.send_mail(rec.id, force_send=True, email_values=email_values)
+        return call_super
 
 
+class Helpdesk_department_list(models.Model):
+    _name = 'helpdesk.department'
+    _description = "Helpdesk Department List"
+
+    name = fields.Char(
+        "Name",
+        required=True
+    )
+    email_to = fields.Char(
+        "Email To"
+    )
+    email_cc = fields.Char(
+        "Email CC"
+    )
+    template_id = fields.Many2one(
+        'mail.template',
+        "Email Template",
+        domain="[('model', '=', 'helpdesk.ticket')]",
+        required=True
+    )
+    active = fields.Boolean(
+        "Active",
+        default=True,
+    )
 
 
+class helpdesk_project_list(models.Model):
+    _name = 'helpdesk.project'
+
+    name = fields.Char(
+        "Name",
+        required=True
+    )
+    active = fields.Boolean(
+        "Active",
+        default=True
+    )
 
 
+class helpdesk_subtype(models.Model):
+    _name = 'helpdesk.subtype'
+
+    name = fields.Char(
+        "Name",
+        required=True
+    )
+    active = fields.Boolean(
+        "Active",
+        default=True
+    )
 
 
+class helpdesk_email(models.Model):
+    _name = 'helpdesk.email.notif'
 
-
-
-
-
-
+    name = fields.Char(
+        "Name",
+        required=True
+    )
+    email_to = fields.Char(
+        "Email To"
+    )
+    email_cc = fields.Char(
+        "Email CC"
+    )
+    template_id = fields.Many2one(
+        'mail.template',
+        "Email Template",
+        domain="[('model', '=', 'helpdesk.ticket')]",
+        required=True
+    )
+    active = fields.Boolean(
+        "Active",
+        default=True
+    )
