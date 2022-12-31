@@ -9,6 +9,7 @@
 				<xpath expr="//form/sheet/group" position="inside">
 					<group string="IT_fields" attrs="{'invisible': [('is_IT', '!=', True)]} ">
 					<field name="is_IT" invisible="1"  />
+					<field name="ticket_type_id"  />
 					<field name="codeName"/>
 					<field name="project"/>
 					<field name="voice" widget="boolean_toggle"  />
@@ -22,8 +23,11 @@
 					<field name="facebook" widget="boolean_toggle" />
 					<field name="webChat" widget="boolean_toggle"  />
 					</group>
+					
 				</xpath>
-                
+				<field name="ticket_type_id" postion="replace" />
+					
+				
                 
             </field>
         </record>
