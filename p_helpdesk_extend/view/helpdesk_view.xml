@@ -11,12 +11,7 @@
                     
                     <field name="CodeName"/>
 		            <field name="Voice" widget="boolean_toggle"/>
-					<field name="ChatBot" widget="boolean_toggle"/>
-					<field name="SmartIVR" widget="boolean_toggle"/>
-					<field name="IVRDeflection" widget="boolean_toggle"/>
-					<field name="Transactions" widget="boolean_toggle"/>
-					<field name="NumberofLicenses"/>
-					<field name="Attachment"/>
+					
                 </xpath>
                 
                 
