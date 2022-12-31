@@ -18,88 +18,25 @@
 					<field name="NumberofLicenses"/>
 					<field name="Attachment"/>
                 </xpath>
-                <xpath expr="//field[@name='partner_id']" position="attributes">
-                    <attribute name="required">1</attribute>
-                </xpath>
+                
                 
             </field>
         </record>
 
-        <record id="view_helpdesk_department_tree" model="ir.ui.view">
-            <field name="name">helpdesk.department.tree</field>
-            <field name="model">helpdesk.department</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                </tree>
-            </field>
-        </record>
+  
 
 
-        <record id="view_helpdesk_lead_status_tree" model="ir.ui.view">
-            <field name="name">helpdesk.lead.status.tree</field>
-           
-            <field name="arch" type="xml">
-                <tree editable="top">
-                    <field name="name"/>
-                </tree>
-            </field>
-        </record>
+    
 
-        <record id="view_helpdesk_lead_email_tree" model="ir.ui.view">
-            <field name="name">helpdesk.email.tree</field>
-            <field name="model">helpdesk.email.notif</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                </tree>
-            </field>
-        </record>
+     
 
-        <record id="view_helpdesk_lead_email_form" model="ir.ui.view">
-            <field name="name">helpdesk.email.form</field>
-            <field name="model">helpdesk.email.notif</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="email_to"/>
-                            <field name="email_cc"/>
-                            <field name="template_id"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+     
 
-        <record id="action_department" model="ir.actions.act_window">
-            <field name="name">Department</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">helpdesk.department</field>
-            <field name="domain">[]</field>
-            <field name="context">{}</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                </p>
-            </field>
-        </record>
+  
 
        
 
-        <record id="action_helpdesk_email_notif" model="ir.actions.act_window">
-            <field name="name">Email Notification</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">helpdesk.email.notif</field>
-            <field name="domain">[]</field>
-            <field name="context">{}</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                </p>
-            </field>
-        </record>
+     
 
     </data>
 </odoo>
