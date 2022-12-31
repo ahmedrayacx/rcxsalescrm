@@ -9,8 +9,7 @@ class Helpdesk_ticket(models.Model):
     ChatBot = fields.Boolean(string="ChatBot",default=False)
     SmartIVR = fields.Boolean(string="Smart IVR",default=False)
     IVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
-    Transactions = fields.Selection(
-        [('Inbound', 'Inbound'), ('Outbound', 'Outbound'), ('Inbound&Outbound', 'Inbound-Outbound'))
+   
     NumberofLicenses= fields.Char(
         "Number of Licenses / Ports"
     )
