@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
 				<xpath expr="//field[@name='team_id']" position="after">
 					<field name="CodeName"/>
-					
+					<field name="Project"/>
 					<field name="Voice" widget="boolean_toggle"/>
 					<field name="ChatBot" widget="boolean_toggle"/>
 					<field name="SmartIVR" widget="boolean_toggle"/>
