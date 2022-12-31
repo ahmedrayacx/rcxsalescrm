@@ -27,6 +27,12 @@
 						<field name="is_IT" invisible="1"  />
 						
 						<field name="market"/>
+						<field name="industry"/>
+						<field name="type_of_service"/>
+						<field name="existingclient" widget="boolean_toggle"/>
+						<field name="noofFTEs"/>
+						<field name="date_received"/>
+						<field name="date_closed"/>
 						
 					</group>
 				</xpath>
