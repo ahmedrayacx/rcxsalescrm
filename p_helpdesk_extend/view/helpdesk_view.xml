@@ -7,10 +7,8 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
 				<xpath position="after">
-                
-                    
-                    <field name="CodeName"/>
-		            <field name="Voice" widget="boolean_toggle"/>
+                  <field name="CodeName"/>
+		          <field name="Voice" widget="boolean_toggle"/>
 					
                 </xpath>
                 
