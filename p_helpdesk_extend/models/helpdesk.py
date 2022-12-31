@@ -10,7 +10,9 @@ class Helpdesk_ticket(models.Model):
     ChatBot = fields.Boolean(string="ChatBot",default=False)
     SmartIVR = fields.Boolean(string="Smart IVR",default=False)
     IVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
-    Attachment = fields.Binary()
+    Transactions = fields.Selection(
+        [('inbound', 'Inbound'), ('outbound', 'Outbound'), ('inbound&outbound', 'Inbound-Outbound')],string='Transactions')
+    Attachment = fields.Binary(string='Attachment')
     WhatsApp = fields.Boolean(string="WhatsApp",default=False)
     Facebook = fields.Boolean(string="Facebook",default=False)
     WebChat = fields.Boolean(string="WebChat",default=False)
