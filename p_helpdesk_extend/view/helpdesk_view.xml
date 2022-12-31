@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
 				<xpath expr="//form/sheet/group" position="inside">
-					<group string="IT_fields" attrs="{'invisible': [('is_IT', '!=', True)]} ">
+					<group  attrs="{'invisible': [('is_IT', '!=', True)]} ">
 					<field name="is_IT" invisible="1"  />
 					<field name="ticket_type_id"  />
 					<field name="codeName"/>
