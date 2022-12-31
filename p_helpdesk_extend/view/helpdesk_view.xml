@@ -6,23 +6,22 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='email_cc']" position="after">
-                    <field name="help_depart_id"
-                           options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
-                    <field name="help_project_id"
-                           options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
-                    <field name="help_subtype_id"
-                           options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
-                    <field name="unit_number"/>
-                    <field name="case_code"/>
-		    <field name="test_bool" widget="boolean_toggle"/>
+				<xpath position="after">
+                
+                    <field name="Project"/>
+                    <field name="CodeName"/>
+		            <field name="Voice" widget="boolean_toggle"/>
+					<field name="ChatBot" widget="boolean_toggle"/>
+					<field name="SmartIVR" widget="boolean_toggle"/>
+					<field name="IVRDeflection" widget="boolean_toggle"/>
+					<field name="Transactions" widget="boolean_toggle"/>
+					<field name="NumberofLicenses"/>
+					<field name="Attachment"/>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="attributes">
                     <attribute name="required">1</attribute>
                 </xpath>
-                <xpath expr="//field[@name='partner_phone']" position="attributes">
-                    <attribute name="required">1</attribute>
-                </xpath>
+                
             </field>
         </record>
 
@@ -36,37 +35,10 @@
             </field>
         </record>
 
-        <record id="view_helpdesk_email_form" model="ir.ui.view">
-            <field name="name">helpdesk_depart.form</field>
-            <field name="model">helpdesk.department</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="email_to"/>
-                            <field name="email_cc"/>
-                            <field name="template_id"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <record id="view_helpdesk_project_tree" model="ir.ui.view">
-            <field name="name">helpdesk.project.tree</field>
-            <field name="model">helpdesk.project</field>
-            <field name="arch" type="xml">
-                <tree editable="top">
-                    <field name="name"/>
-
-                </tree>
-            </field>
-        </record>
 
         <record id="view_helpdesk_lead_status_tree" model="ir.ui.view">
             <field name="name">helpdesk.lead.status.tree</field>
-            <field name="model">helpdesk.subtype</field>
+           
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
@@ -114,31 +86,7 @@
             </field>
         </record>
 
-        <record id="action_projects" model="ir.actions.act_window">
-            <field name="name">Projects</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">helpdesk.project</field>
-            <field name="domain">[]</field>
-            <field name="context">{}</field>
-            <field name="view_mode">tree</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                </p>
-            </field>
-        </record>
-
-        <record id="action_subtypes" model="ir.actions.act_window">
-            <field name="name">Subtypes</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">helpdesk.subtype</field>
-            <field name="domain">[]</field>
-            <field name="context">{}</field>
-            <field name="view_mode">tree</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                </p>
-            </field>
-        </record>
+       
 
         <record id="action_helpdesk_email_notif" model="ir.actions.act_window">
             <field name="name">Email Notification</field>
@@ -152,22 +100,6 @@
                 </p>
             </field>
         </record>
-
-        <menuitem id="menu_helpdesk_master_data"
-                  name="Master Data" parent="helpdesk.helpdesk_menu_config"
-                  sequence="4"/>
-
-        <menuitem id="menu_helpdesk_department_status"
-                  action="action_department" parent="menu_helpdesk_master_data"
-                  sequence="1"/>
-
-        <menuitem id="menu_helpdesk_project_status"
-                  action="action_projects" parent="menu_helpdesk_master_data"
-                  sequence="2"/>
-
-        <menuitem id="menu_helpdesk_subtype_status"
-                  action="action_subtypes" parent="menu_helpdesk_master_data"
-                  sequence="3"/>
 
     </data>
 </odoo>
