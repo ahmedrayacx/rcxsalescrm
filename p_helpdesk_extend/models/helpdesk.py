@@ -22,8 +22,22 @@ class Helpdesk_ticket(models.Model):
     market=fields.Selection([('egypt', 'Egypt'), ('gcc', 'GCC'),('uae','UAE'),('morroco','Morroco'),('ksa', 'KSA'),
     ('bahrain','Bahrain'),('kuwait','Kuwait'),('australia','Australia'),('mea','MEA'),('usa','USA'),
     ('europeuk','Europe/UK'),('oman','Oman'),('qatar','Qatar')], string='Market')
-   
-   
+    industry= fields.Selection(
+        [('travel', 'Travel'), ('printingIT', 'Printing / IT'), ('hotelsresort', 'Hotels/Resort'),('fintech','Fintech'),
+        ('medical','Medical'),('education','Education'),('hospitality','Hospitality'),('logistics','Logistics'),
+        ('ecommerce','E-Commerce'),('telecom','Telecom'),('elevator','Elevator'),('transportation','Transportation'),
+        ('it','IT'),('government','Government'),('fb','F&B'),('entertainment','Entertainment'),('insurance','Insurance'),
+        ('wellness','Wellness'),('healthcare','Healthcare'),('retail','Retail'),('automotive','Automotive'),
+        ('financial','Financial'),('pastry','Pastry'),('helathtech','Helath Tech'),('publishing','Publishing'),
+        ('airline','Airline'),('realestate','Real estate'),('mediaentertainment','Media & Entertainment'),
+        ('insurtech','Insurtech'),('technology','Technology'),('shipping','Shipping & Logistics'),('manufacturing','Manufacturing'),
+        ('printing','Printing'),('fashion','Fashion'),('consumerelectronics','Consumer Electronics')],string='Industry')
+    type_of_service=fields.Selection([('bPO', 'BPO'), ('outboundcampaign', 'Outbound Campaign'),('hro','HRO'),('ito','ITO'),('hosting', 'Hosting')], string='Type of Service')
+    existingclient = fields.Boolean(string="Existing Client ?",default=False)
+    date_received=fields.Date(string="Date Received")
+    date_closed=fields.Date(string="Date Closed")
+    noofFTEs = fields.Char("No Of FTEs")
+    
     @api.depends('team_id')
     def compute_is_IT(self):
         for rec in self:
