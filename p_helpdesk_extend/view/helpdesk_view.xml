@@ -6,11 +6,10 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
-				<xpath>
-                  <field name="CodeName"/>
-		          <field name="Voice" widget="boolean_toggle"/>
-					
-                </xpath>
+				<group>
+					<field name="CodeName"/>
+					<field name="Voice" widget="boolean_toggle"/>
+				</group>
                 
                 
             </field>
