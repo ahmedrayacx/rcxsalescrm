@@ -13,7 +13,8 @@
 					<field name="ChatBot" widget="boolean_toggle"/>
 					<field name="SmartIVR" widget="boolean_toggle"/>
 					<field name="IVRDeflection" widget="boolean_toggle"/>
-					
+					<field name="Transactions"/>
+					<field name="Attachment"/>
 					<field name="WhatsApp" widget="boolean_toggle"/>
 					<field name="Facebook" widget="boolean_toggle"/>
 					<field name="WebChat" widget="boolean_toggle"/>
