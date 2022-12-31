@@ -19,7 +19,9 @@ class Helpdesk_ticket(models.Model):
     whatsApp = fields.Boolean(string="WhatsApp",default=False)
     facebook = fields.Boolean(string="Facebook",default=False)
     webChat = fields.Boolean(string="WebChat",default=False)
-   
+    market=fields.Selection([('egypt', 'Egypt'), ('gcc', 'GCC'),('uae','UAE'),('morroco','Morroco'),('ksa', 'KSA'),
+    ('bahrain','Bahrain'),('kuwait','Kuwait'),('australia','Australia'),('mea','MEA'),('usa','USA'),
+    ('europeuk','Europe/UK'),('oman','Oman'),('qatar','Qatar')], string='Market')
    
    
     @api.depends('team_id')
