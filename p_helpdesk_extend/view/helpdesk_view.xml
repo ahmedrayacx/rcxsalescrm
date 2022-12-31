@@ -6,20 +6,22 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
-				<xpath expr="//field[@name='team_id']" position="after">
+				<xpath expr="//form/sheet/group" position="inside">
+					<group string="IT_fields" attrs="{'invisible': [('is_IT', '!=', True)]} ">
 					<field name="is_IT" invisible="1"  />
 					<field name="codeName"/>
 					<field name="project"/>
-					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]} " />
-					<field name="chatBot" widget="boolean_toggle"/>
-					<field name="smartIVR" widget="boolean_toggle"/>
-					<field name="iVRDeflection" widget="boolean_toggle"/>
-					<field name="transactions"/>
-					<field name="numberofLicenses"/>
-					<field name="attachment"/>
-					<field name="whatsApp" widget="boolean_toggle"/>
-					<field name="facebook" widget="boolean_toggle"/>
-					<field name="webChat" widget="boolean_toggle"/>
+					<field name="voice" widget="boolean_toggle"  />
+					<field name="chatBot" widget="boolean_toggle"  />
+					<field name="smartIVR" widget="boolean_toggle"  />
+					<field name="iVRDeflection" widget="boolean_toggle"  />
+					<field name="transactions"  />
+					<field name="numberofLicenses"   />
+					<field name="attachment"  />
+					<field name="whatsApp" widget="boolean_toggle"  />
+					<field name="facebook" widget="boolean_toggle" />
+					<field name="webChat" widget="boolean_toggle"  />
+					</group>
 				</xpath>
                 
                 
