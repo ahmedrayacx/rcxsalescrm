@@ -10,7 +10,7 @@
 					<field name="is_IT" invisible="1"  />
 					<field name="CodeName"/>
 					<field name="Project"/>
-					<field name="Voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]} " />
+					<field name="Voice" widget="boolean_toggle" attrs="{'invisible': [('helpdesk.team.name', '!=', 'IT')]} " />
 					<field name="ChatBot" widget="boolean_toggle"/>
 					<field name="SmartIVR" widget="boolean_toggle"/>
 					<field name="IVRDeflection" widget="boolean_toggle"/>
