@@ -12,6 +12,9 @@ class Helpdesk_ticket(models.Model):
     IVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
     Transactions = fields.Selection(
         [('inbound', 'Inbound'), ('outbound', 'Outbound'), ('inbound&outbound', 'Inbound-Outbound')],string='Transactions')
+    NumberofLicenses= fields.Char(
+        "Number of Licenses / Ports"
+    )
     Attachment = fields.Binary(string='Attachment')
     WhatsApp = fields.Boolean(string="WhatsApp",default=False)
     Facebook = fields.Boolean(string="Facebook",default=False)
