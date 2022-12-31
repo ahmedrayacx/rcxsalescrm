@@ -16,16 +16,21 @@
 					<field name="chatBot" widget="boolean_toggle"  />
 					<field name="smartIVR" widget="boolean_toggle"  />
 					<field name="iVRDeflection" widget="boolean_toggle"  />
-					<field name="transactions"  />
-					<field name="numberofLicenses"   />
-					<field name="attachment"  />
 					<field name="whatsApp" widget="boolean_toggle"  />
 					<field name="facebook" widget="boolean_toggle" />
 					<field name="webChat" widget="boolean_toggle"  />
+					<field name="transactions"  />
+					<field name="numberofLicenses"   />
+					<field name="attachment"  />					
 					</group>
-					
+					<group  attrs="{'invisible': [('is_IT', '=', True)]} ">
+						<field name="is_IT" invisible="1"  />
+						
+						<field name="market"/>
+						
+					</group>
 				</xpath>
-				<xpath expr="//field[@name='ticket_type_id']" position="replace" ></xpath>
+				
 					
 				
                 
