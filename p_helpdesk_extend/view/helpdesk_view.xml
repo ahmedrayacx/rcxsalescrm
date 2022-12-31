@@ -8,18 +8,18 @@
             <field name="arch" type="xml">
 				<xpath expr="//field[@name='team_id']" position="after">
 					<field name="is_IT" invisible="1"  />
-					<field name="CodeName"/>
+					<field name="codeName"/>
 					<field name="project"/>
-					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('project', '=', 'new')]} " />
-					<field name="ChatBot" widget="boolean_toggle"/>
-					<field name="SmartIVR" widget="boolean_toggle"/>
-					<field name="IVRDeflection" widget="boolean_toggle"/>
-					<field name="Transactions"/>
-					<field name="NumberofLicenses"/>
-					<field name="Attachment"/>
-					<field name="WhatsApp" widget="boolean_toggle"/>
-					<field name="Facebook" widget="boolean_toggle"/>
-					<field name="WebChat" widget="boolean_toggle"/>
+					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]} " />
+					<field name="chatBot" widget="boolean_toggle"/>
+					<field name="smartIVR" widget="boolean_toggle"/>
+					<field name="iVRDeflection" widget="boolean_toggle"/>
+					<field name="transactions"/>
+					<field name="numberofLicenses"/>
+					<field name="attachment"/>
+					<field name="whatsApp" widget="boolean_toggle"/>
+					<field name="facebook" widget="boolean_toggle"/>
+					<field name="webChat" widget="boolean_toggle"/>
 				</xpath>
                 
                 
