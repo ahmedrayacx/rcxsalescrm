@@ -9,8 +9,8 @@
 				<xpath expr="//field[@name='team_id']" position="after">
 					<field name="is_IT" invisible="1"  />
 					<field name="CodeName"/>
-					<field name="Project"/>
-					<field name="Voice" widget="boolean_toggle" attrs="{'invisible': [('Project', '=', 'new')]} " />
+					<field name="project"/>
+					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('project', '=', 'new')]} " />
 					<field name="ChatBot" widget="boolean_toggle"/>
 					<field name="SmartIVR" widget="boolean_toggle"/>
 					<field name="IVRDeflection" widget="boolean_toggle"/>
