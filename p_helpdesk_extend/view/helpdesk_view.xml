@@ -6,35 +6,35 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
-				<xpath expr="//form/sheet/group" position="inside">
-					<group  attrs="{'invisible': [('is_IT', '!=', True)]} ">
+				<xpath expr="//field[@name='team_id']" position="after">
+					
 					<field name="is_IT" invisible="1"  />
 					
 					<field name="codeName"/>
-					<field name="project"/>
-					<field name="voice" widget="boolean_toggle"  />
-					<field name="chatBot" widget="boolean_toggle"  />
-					<field name="smartIVR" widget="boolean_toggle"  />
-					<field name="iVRDeflection" widget="boolean_toggle"  />
-					<field name="whatsApp" widget="boolean_toggle"  />
-					<field name="facebook" widget="boolean_toggle" />
-					<field name="webChat" widget="boolean_toggle"  />
-					<field name="transactions"  />
-					<field name="numberofLicenses"   />
-					<field name="attachment"  />					
-					</group>
-					<group  attrs="{'invisible': [('is_IT', '=', True)]} ">
-						<field name="is_IT" invisible="1"  />
+					<field name="project"  />
+					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="chatBot" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="smartIVR" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="iVRDeflection" widget="boolean_toggle"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="whatsApp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="facebook" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="webChat" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="numberofLicenses"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
+					<field name="attachment" attrs="{'invisible': [('is_IT', '!=', True)]}" />					
+					
+					
 						
-						<field name="market"/>
-						<field name="industry"/>
-						<field name="type_of_service"/>
-						<field name="existingclient" widget="boolean_toggle"/>
-						<field name="noofFTEs"/>
-						<field name="date_received"/>
-						<field name="date_closed"/>
+						 
+						<field name="market" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="type_of_service" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="existingclient" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+						<field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
 						
-					</group>
+					
 				</xpath>
 				
 					
