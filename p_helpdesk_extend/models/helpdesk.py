@@ -5,7 +5,8 @@ class Helpdesk_ticket(models.Model):
     _inherit = 'helpdesk.ticket'
     is_IT=fields.Boolean(compute='compute_is_IT')
     codeName = fields.Char("Code Name")
-    project = fields.Selection([('new', 'New'), ('existed', 'Existed')], string='Project')
+    #project = fields.Selection([('new', 'New'), ('existed', 'Existed')], string='Project')
+    ticketType = fields.Selection([('inquery', 'Inquery'), ('requestsolution', 'Request Solution')], string='Ticket Type')
     voice = fields.Boolean(string="Voice",default=False)
     chatBot = fields.Boolean(string="ChatBot",default=False)
     smartIVR = fields.Boolean(string="Smart IVR",default=False)
