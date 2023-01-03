@@ -36,7 +36,7 @@ class Helpdesk_ticket(models.Model):
     type_of_service=fields.Selection([('bPO', 'BPO'), ('outboundcampaign', 'Outbound Campaign'),('hro','HRO'),('ito','ITO'),('hosting', 'Hosting')], string='Type of Service')
     solution=fields.Selection([('newsolution', 'New Solution'), ('updatedsolution', 'Updated Solution')], string='Solution')
     presalesstatus=fields.Selection([('new', 'New'), ('inprogress', 'In Progress'),('closed', 'Closed')], string='Presales Status')
-    rfp = fields.Char("RFP#")
+    rfp = fields.Boolean("RFP",default=False)
     rfpsubmissiondate=fields.Date(string="RFP Submission Date")
     existingclient = fields.Boolean(string="Existing Client ?",default=False)
     rfpontime = fields.Boolean(string="RFP (On-time)?",default=False)
