@@ -12,6 +12,7 @@
 					
 					<field name="codeName"/>
 					<field name="existingclient" widget="boolean_toggle"  />
+					<field name="ticketType"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
 					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
 					<field name="chatBot" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
 					<field name="smartIVR" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
@@ -28,14 +29,15 @@
 						 
 						<field name="market" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="type_of_service" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						
+						<field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="type_of_service" attrs="{'invisible': [('is_IT', '=', True)]}" />					
 						<field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
 						<field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-
-					
-						
+						<field name="presalesstatus" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="rfp" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}" />
 
 				</xpath>
 				
