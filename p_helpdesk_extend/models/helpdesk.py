@@ -11,6 +11,8 @@ class Helpdesk_ticket(models.Model):
     chatBot = fields.Boolean(string="ChatBot",default=False)
     smartIVR = fields.Boolean(string="Smart IVR",default=False)
     iVRDeflection  = fields.Boolean(string="IVR Deflection",default=False)
+    #new ivr field
+    ivr  = fields.Boolean(string="IVR",default=False)
     transactions = fields.Selection(
         [('inbound', 'Inbound'), ('outbound', 'Outbound'), ('inbound&outbound', 'Inbound-Outbound')],string='Transactions')
     numberofLicenses= fields.Char(
@@ -18,8 +20,22 @@ class Helpdesk_ticket(models.Model):
     )
     attachment = fields.Binary(string='Attachment')
     whatsApp = fields.Boolean(string="WhatsApp",default=False)
-    facebook = fields.Boolean(string="Facebook",default=False)
+    soicalmedia = fields.Boolean(string="Social Media",default=False)
     webChat = fields.Boolean(string="WebChat",default=False)
+    
+    #new fields 
+    survey = fields.Boolean(string="Survey",default=False)
+    sms = fields.Boolean(string="SMS",default=False)
+    crm = fields.Boolean(string="CRM",default=False)
+    email = fields.Boolean(string="Email",default=False)
+    dailer = fields.Boolean(string="Dialer",default=False)
+    qms = fields.Boolean(string="QMS",default=False)
+    hosting = fields.Boolean(string="Hosting",default=False)
+    integration = fields.Boolean(string="Integration",default=False)
+    pendingstage = fields.Selection([('proposal', 'Proposal'), ('integration', 'Integration'),('sow', 'SOW'),('solutiondesign', 'Solution Design'),('demo', 'Demo'),('poc', 'POC'),('finalized', 'Finalized')], string='Pending Stage')
+    
+    
+    
     market=fields.Selection([('egypt', 'Egypt'), ('gcc', 'GCC'),('uae','UAE'),('morroco','Morroco'),('ksa', 'KSA'),
     ('bahrain','Bahrain'),('kuwait','Kuwait'),('australia','Australia'),('mea','MEA'),('usa','USA'),
     ('europeuk','Europe/UK'),('oman','Oman'),('qatar','Qatar')], string='Market')
@@ -43,6 +59,8 @@ class Helpdesk_ticket(models.Model):
     date_received=fields.Date(string="Date Received")
     date_closed=fields.Date(string="Date Closed")
     noofFTEs = fields.Char("No Of FTEs")
+    
+    
     
     @api.depends('team_id')
     def compute_is_IT(self):
