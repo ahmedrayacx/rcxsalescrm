@@ -112,7 +112,7 @@
         <field name="name">helpdesk.market.tree</field>
         <field name="model">helpdesk.market</field>
         <field name="arch" type="xml">
-            <tree editable="top" string="Market" sample="1" multi_edit="1">
+            <tree editable="top" string="market" sample="1" multi_edit="1">
                 <field name="name"/>
                 <field name="color" widget="color_picker"/>
             </tree>
@@ -137,7 +137,7 @@
     </record>
 
     <record id="helpdesk_market_action" model="ir.actions.act_window">
-        <field name="name">Market</field>
+        <field name="name">market</field>
         <field name="res_model">helpdesk.market</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
