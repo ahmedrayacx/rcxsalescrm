@@ -39,9 +39,9 @@ class Helpdesk_ticket(models.Model):
     
     
     
-    market=fields.Selection([('egypt', 'Egypt'), ('gcc', 'GCC'),('uae','UAE'),('morroco','Morroco'),('ksa', 'KSA'),
-    ('bahrain','Bahrain'),('kuwait','Kuwait'),('australia','Australia'),('mea','MEA'),('usa','USA'),
-    ('europeuk','Europe/UK'),('oman','Oman'),('qatar','Qatar')], string='Market')
+   # market=fields.Selection([('egypt', 'Egypt'), ('gcc', 'GCC'),('uae','UAE'),('morroco','Morroco'),('ksa', 'KSA'),
+   # ('bahrain','Bahrain'),('kuwait','Kuwait'),('australia','Australia'),('mea','MEA'),('usa','USA'),
+    #('europeuk','Europe/UK'),('oman','Oman'),('qatar','Qatar')], string='Market')
     industry= fields.Selection(
         [('travel', 'Travel'), ('printingIT', 'Printing / IT'), ('hotelsresort', 'Hotels/Resort'),('fintech','Fintech'),
         ('medical','Medical'),('education','Education'),('hospitality','Hospitality'),('logistics','Logistics'),
@@ -55,6 +55,7 @@ class Helpdesk_ticket(models.Model):
     #type_of_service=fields.Selection([('bPO', 'BPO'), ('outboundcampaign', 'Outbound Campaign'),('hro','HRO'),('ito','ITO'),('hosting', 'Hosting')], string='Type of Service')
     
     type_of_service_ids = fields.Many2many('helpdesk.typeofservice', string='Type Of Service')
+    market_ids = fields.Many2many('helpdesk.Market', string='Market')
     solution=fields.Selection([('newsolution', 'New Solution'), ('updatedsolution', 'Updated Solution')], string='Solution')
     presalesstatus=fields.Selection([('new', 'New'), ('inprogress', 'In Progress'),('closed', 'Closed')], string='Presales Status')
     rfp = fields.Boolean("RFP",default=False)
@@ -96,6 +97,20 @@ class HelpdeskTypeOfService(models.Model):
 
 
 
+class HelpdeskMarket(models.Model):
+    _name = 'helpdesk.Market'
+    _description = 'Lead Market'
+    _order = 'name'
+
+    def _get_default_color(self):
+        return randint(1, 11)
+
+    name = fields.Char(required=True, translate=True)
+    color = fields.Integer('Color', default=_get_default_color)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Market name already exists !"),
+    ]
 
 
 
