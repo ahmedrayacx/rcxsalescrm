@@ -108,9 +108,9 @@
     
 
      
-   <record id="helpdesk_Market_view_tree" model="ir.ui.view">
-        <field name="name">helpdesk.Market.tree</field>
-        <field name="model">helpdesk.Market</field>
+   <record id="helpdesk_market_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.market.tree</field>
+        <field name="model">helpdesk.market</field>
         <field name="arch" type="xml">
             <tree editable="top" string="Market" sample="1" multi_edit="1">
                 <field name="name"/>
@@ -119,9 +119,9 @@
         </field>
     </record>
 
-    <record id="helpdesk_Market_view_form" model="ir.ui.view">
-        <field name="name">helpdesk.Market.form</field>
-        <field name="model">helpdesk.Market</field>
+    <record id="helpdesk_market_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.market.form</field>
+        <field name="model">helpdesk.market</field>
         <field name="arch" type="xml">
             <form string="Market">
                 <sheet>
@@ -136,9 +136,9 @@
         </field>
     </record>
 
-    <record id="helpdesk_Market_action" model="ir.actions.act_window">
+    <record id="helpdesk_market_action" model="ir.actions.act_window">
         <field name="name">Market</field>
-        <field name="res_model">helpdesk.Market</field>
+        <field name="res_model">helpdesk.market</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
           <p class="o_view_nocontent_smiling_face">
@@ -149,7 +149,7 @@
         </field>
     </record>
 
-    <menuitem id="helpdesk_Market_menu" action="helpdesk_Market_action"
+    <menuitem id="helpdesk_market_menu" action="helpdesk_market_action"
         sequence="2" parent="helpdesk.helpdesk_menu_config"
         groups="base.group_no_one"/>
 
