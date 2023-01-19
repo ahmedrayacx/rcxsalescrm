@@ -41,7 +41,7 @@
 						<field name="market" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'} attrs="{'invisible': [('is_IT', '=', True)]}" />					
+						<field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': [('is_IT', '=', True)]}" />					
 						<field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
 						<field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
