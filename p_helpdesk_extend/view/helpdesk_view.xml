@@ -38,10 +38,11 @@
 					
 						
 						 
-						<field name="market" attrs="{'invisible': [('is_IT', '=', True)]}" />
+						<field name="market_ids"  widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': [('is_IT', '=', True)]}" />					
+						<field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': [('is_IT', '=', True)]}" />
+
 						<field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
 						<field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}" />
 						<field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
@@ -107,6 +108,50 @@
     
 
      
+   <record id="helpdesk_Market_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.Market.tree</field>
+        <field name="model">helpdesk.Market</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Market" sample="1" multi_edit="1">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="helpdesk_Market_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.Market.form</field>
+        <field name="model">helpdesk.Market</field>
+        <field name="arch" type="xml">
+            <form string="Market">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="helpdesk_Market_action" model="ir.actions.act_window">
+        <field name="name">Market</field>
+        <field name="res_model">helpdesk.Market</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No Market found. Let's create one!
+          </p><p>
+            Market are perfect for organizing your solution.
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="helpdesk_Market_menu" action="helpdesk_Market_action"
+        sequence="2" parent="helpdesk.helpdesk_menu_config"
+        groups="base.group_no_one"/>
 
      
 
