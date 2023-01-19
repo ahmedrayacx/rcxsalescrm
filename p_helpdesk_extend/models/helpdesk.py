@@ -76,7 +76,7 @@ class Helpdesk_ticket(models.Model):
 
 
 
-class HelpdeskTag(models.Model):
+class HelpdeskTypeOfService(models.Model):
     _name = 'helpdesk.typeofservice'
     _description = 'Helpdesk Type Of Service'
     _order = 'name'
