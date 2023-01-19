@@ -55,7 +55,7 @@ class Helpdesk_ticket(models.Model):
     #type_of_service=fields.Selection([('bPO', 'BPO'), ('outboundcampaign', 'Outbound Campaign'),('hro','HRO'),('ito','ITO'),('hosting', 'Hosting')], string='Type of Service')
     
     type_of_service_ids = fields.Many2many('helpdesk.typeofservice', string='Type Of Service')
-    market_ids = fields.Many2many('helpdesk.Market', string='Market')
+    market_ids = fields.Many2many('helpdesk.market', string='Market')
     solution=fields.Selection([('newsolution', 'New Solution'), ('updatedsolution', 'Updated Solution')], string='Solution')
     presalesstatus=fields.Selection([('new', 'New'), ('inprogress', 'In Progress'),('closed', 'Closed')], string='Presales Status')
     rfp = fields.Boolean("RFP",default=False)
@@ -98,7 +98,7 @@ class HelpdeskTypeOfService(models.Model):
 
 
 class HelpdeskMarket(models.Model):
-    _name = 'helpdesk.Market'
+    _name = 'helpdesk.market'
     _description = 'Lead Market'
     _order = 'name'
 
