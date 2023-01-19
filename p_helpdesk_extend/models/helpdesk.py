@@ -49,7 +49,9 @@ class Helpdesk_ticket(models.Model):
         ('airline','Airline'),('realestate','Real estate'),('mediaentertainment','Media & Entertainment'),
         ('insurtech','Insurtech'),('technology','Technology'),('shipping','Shipping & Logistics'),('manufacturing','Manufacturing'),
         ('printing','Printing'),('fashion','Fashion'),('consumerelectronics','Consumer Electronics')],string='Industry')
-    type_of_service=fields.Selection([('bPO', 'BPO'), ('outboundcampaign', 'Outbound Campaign'),('hro','HRO'),('ito','ITO'),('hosting', 'Hosting')], string='Type of Service')
+    #type_of_service=fields.Selection([('bPO', 'BPO'), ('outboundcampaign', 'Outbound Campaign'),('hro','HRO'),('ito','ITO'),('hosting', 'Hosting')], string='Type of Service')
+    
+    type_of_service_ids = fields.Many2many('helpdesk.typeofservice', string='Type Of Service')
     solution=fields.Selection([('newsolution', 'New Solution'), ('updatedsolution', 'Updated Solution')], string='Solution')
     presalesstatus=fields.Selection([('new', 'New'), ('inprogress', 'In Progress'),('closed', 'Closed')], string='Presales Status')
     rfp = fields.Boolean("RFP",default=False)
@@ -74,7 +76,20 @@ class Helpdesk_ticket(models.Model):
 
 
 
+class HelpdeskTag(models.Model):
+    _name = 'helpdesk.typeofservice'
+    _description = 'Helpdesk Type Of Service'
+    _order = 'name'
 
+    def _get_default_color(self):
+        return randint(1, 11)
+
+    name = fields.Char(required=True, translate=True)
+    color = fields.Integer('Color', default=_get_default_color)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Service name already exists !"),
+    ]
 
 
 
