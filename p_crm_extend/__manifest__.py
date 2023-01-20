@@ -12,8 +12,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'view/crm_view.xml',
-        'data/data.xml'
+        'view/crm_view.xml'
     ],
     'installable': True,
     'auto_install': False,
