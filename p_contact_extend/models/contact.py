@@ -10,17 +10,7 @@ class Partner_inherit(models.Model):
     codeName = fields.Char("Code Name")
     type_of_service_ids = fields.Many2many('contact.typeofservice', string='Type Of Service')
     market_ids = fields.Many2many('contact.market', string='Market')
-    existingclient = fields.Boolean(string="Existing Client ?",default=False)
-
-
-
-
-
-
-
-
-
-
+    existingclient = fields.Boolean(string="Existing Client ?", default=False)
 
 
 class ContactTypeOfService(models.Model):
@@ -37,7 +27,6 @@ class ContactTypeOfService(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Service name already exists !"),
     ]
-
 
 
 class ContactMarket(models.Model):

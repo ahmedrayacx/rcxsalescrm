@@ -9,7 +9,8 @@
     'description': 'Helpdesk Extend',
     'depends': [
         'base',
-        'helpdesk'
+        'helpdesk',
+        'p_contact_extend'
     ],
     'data': [
         'security/ir.model.access.csv',

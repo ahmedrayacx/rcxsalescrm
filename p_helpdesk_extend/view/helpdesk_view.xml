@@ -6,63 +6,55 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
-				<xpath expr="//field[@name='team_id']" position="after">
-					
-					<field name="is_IT" invisible="1"  />
-					
-					<field name="ticketType"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="chatBot" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="ivr" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="smartIVR" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					
-					<field name="iVRDeflection" widget="boolean_toggle"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="whatsApp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="soicalmedia" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="webChat" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="survey" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="sms" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="crm" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="dailer" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="qms" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="hosting" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="email" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="integration" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="numberofLicenses"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="pendingstage"  attrs="{'invisible': [('is_IT', '!=', True)]}" />
-					<field name="attachment" attrs="{'invisible': [('is_IT', '!=', True)]}" />					
-					
-					
-						
-						 
-						<field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}" />
-
-						<field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-						<field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-						<field name="presalesstatus" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="rfp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}" />
-						<field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}" />
-
-				</xpath>
-				
-					
-				
-                
+                <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="is_IT" invisible="1"/>
+                    <field name="ticketType" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="chatBot" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="ivr" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="smartIVR" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="iVRDeflection" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="whatsApp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="soicalmedia" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="webChat" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="survey" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="sms" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="crm" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="dailer" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="qms" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="hosting" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="email" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="integration" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="numberofLicenses" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="pendingstage" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="attachment" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="presalesstatus" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="rfp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="codeName"/>
+                    <field name="existingclient" widget="boolean_toggle"/>
+                    <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                </xpath>
             </field>
         </record>
 
-
-     
-
-  
-
-       
-
-     
+        <record id="helpdesk.menu_helpdesk_root" model="ir.ui.menu">
+            <field name="name">Solutions Request</field>
+        </record>
+        <record id="helpdesk.helpdesk_team_menu" model="ir.ui.menu">
+            <field name="name">Solutions Request Team</field>
+        </record>
+        <record id="helpdesk.helpdesk_team_dashboard_action_main" model="ir.actions.act_window">
+            <field name="name">Solutions Request Overview</field>
+        </record>
 
     </data>
 </odoo>

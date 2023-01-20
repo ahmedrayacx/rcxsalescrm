@@ -8,7 +8,7 @@
     'summary': 'CRM Extend',
     'description': 'CRM Extend',
     'depends': [
-        'crm'
+        'crm', 'p_contact_extend'
     ],
     'data': [
         'security/ir.model.access.csv',
