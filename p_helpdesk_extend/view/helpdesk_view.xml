@@ -18,7 +18,7 @@
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field name="is_IT" invisible="1"/>
                     <field name="ticketType" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="service_ids" widget="many2many_tags" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                                        
 
                     <field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
