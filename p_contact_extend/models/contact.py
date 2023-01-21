@@ -11,7 +11,7 @@ class Partner_inherit(models.Model):
     type_of_service_ids = fields.Many2many('contact.typeofservice', string='Type Of Service')
     market_ids = fields.Many2many('contact.market', string='Market')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
-
+    deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
 
 class ContactTypeOfService(models.Model):
     _name = 'contact.typeofservice'
@@ -43,3 +43,21 @@ class ContactMarket(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Market name already exists !"),
     ]
+
+
+
+class ContactDeliverySite(models.Model):
+    _name = 'contact.deliverysite'
+    _description = 'Lead Delivery Site'
+    _order = 'name'
+
+    def _get_default_color(self):
+        return randint(1, 11)
+
+    name = fields.Char(required=True, translate=True)
+    color = fields.Integer('Color', default=_get_default_color)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Delivery Site name already exists !"),
+    ]
+    
