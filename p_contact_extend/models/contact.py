@@ -12,6 +12,10 @@ class Partner_inherit(models.Model):
     market_ids = fields.Many2many('contact.market', string='Market')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
     deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
+    
+    _sql_constraints = [
+        ('name_uniq', 'unique (codeName)', "Code Name name already exists !"),
+    ]
 
 class ContactTypeOfService(models.Model):
     _name = 'contact.typeofservice'
