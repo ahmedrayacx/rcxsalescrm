@@ -10,12 +10,12 @@ class Helpdesk_ticket(models.Model):
     is_IT = fields.Boolean(compute='compute_is_IT')
     ticketType = fields.Selection([('inquery', 'Inquery'), ('requestsolution', 'Request Solution')],
                                   string='Ticket Type')
-    voice = fields.Boolean(string="Voice", default=False)
-    chatBot = fields.Boolean(string="ChatBot", default=False)
-    smartIVR = fields.Boolean(string="Smart IVR", default=False)
-    iVRDeflection = fields.Boolean(string="IVR Deflection", default=False)
+    #voice = fields.Boolean(string="Voice", default=False)
+    #chatBot = fields.Boolean(string="ChatBot", default=False)
+    #smartIVR = fields.Boolean(string="Smart IVR", default=False)
+    #iVRDeflection = fields.Boolean(string="IVR Deflection", default=False)
     # new ivr field
-    ivr = fields.Boolean(string="IVR", default=False)
+    #ivr = fields.Boolean(string="IVR", default=False)
     transactions = fields.Selection(
         [('inbound', 'Inbound'), ('outbound', 'Outbound'), ('inbound&outbound', 'Inbound-Outbound')],
         string='Transactions')
@@ -23,19 +23,20 @@ class Helpdesk_ticket(models.Model):
         "Number of Licenses / Ports"
     )
     attachment = fields.Binary(string='Attachment')
-    whatsApp = fields.Boolean(string="WhatsApp", default=False)
-    soicalmedia = fields.Boolean(string="Social Media", default=False)
-    webChat = fields.Boolean(string="WebChat", default=False)
+    #whatsApp = fields.Boolean(string="WhatsApp", default=False)
+    #soicalmedia = fields.Boolean(string="Social Media", default=False)
+    #webChat = fields.Boolean(string="WebChat", default=False)
 
     # new fields
-    survey = fields.Boolean(string="Survey", default=False)
-    sms = fields.Boolean(string="SMS", default=False)
-    crm = fields.Boolean(string="CRM", default=False)
-    email = fields.Boolean(string="Email", default=False)
-    dailer = fields.Boolean(string="Dialer", default=False)
-    qms = fields.Boolean(string="QMS", default=False)
-    hosting = fields.Boolean(string="Hosting", default=False)
-    integration = fields.Boolean(string="Integration", default=False)
+    #survey = fields.Boolean(string="Survey", default=False)
+    #sms = fields.Boolean(string="SMS", default=False)
+    #crm = fields.Boolean(string="CRM", default=False)
+    #email = fields.Boolean(string="Email", default=False)
+    #dailer = fields.Boolean(string="Dialer", default=False)
+    #qms = fields.Boolean(string="QMS", default=False)
+    #hosting = fields.Boolean(string="Hosting", default=False)
+    #integration = fields.Boolean(string="Integration", default=False)
+    
     pendingstage = fields.Selection([('proposal', 'Proposal'), ('integration', 'Integration'), ('sow', 'SOW'),
                                      ('solutiondesign', 'Solution Design'), ('demo', 'Demo'), ('poc', 'POC'),
                                      ('finalized', 'Finalized')], string='Pending Stage')
@@ -71,6 +72,7 @@ class Helpdesk_ticket(models.Model):
     type_of_service_ids = fields.Many2many('contact.typeofservice', string='Type Of Service')
     market_ids = fields.Many2many('contact.market', string='Market')
     deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
+    service_ids = fields.Many2many('helpdesk.service', string='Service')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
 
     @api.onchange('codeName')
@@ -109,3 +111,22 @@ class Helpdesk_ticket(models.Model):
                 rec.is_IT = True
             else:
                 rec.is_IT = False
+
+
+
+
+class HelpdeskService(models.Model):
+    _name = 'helpdesk.service'
+    _description = 'IT Service'
+    _order = 'name'
+
+    def _get_default_color(self):
+        return randint(1, 11)
+
+    name = fields.Char(required=True, translate=True)
+    color = fields.Integer('Color', default=_get_default_color)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "IT Service name already exists !"),
+    ]
+    
