@@ -19,21 +19,8 @@
                     <field name="is_IT" invisible="1"/>
                     <field name="ticketType" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="voice" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="chatBot" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="ivr" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="smartIVR" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="iVRDeflection" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="whatsApp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="soicalmedia" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="webChat" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="survey" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="sms" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="crm" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="dailer" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="qms" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="hosting" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="email" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="integration" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                                       
+
                     <field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="numberofLicenses" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="pendingstage" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
@@ -62,5 +49,55 @@
             <field name="name">Solutions Request Overview</field>
         </record>
 
+
+
+
+
+
+
+<record id="helpdesk_service_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.service.tree</field>
+        <field name="model">helpdesk.service</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="IT Service" sample="1" multi_edit="1">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="helpdesk_service_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.service.form</field>
+        <field name="model">helpdesk.service</field>
+        <field name="arch" type="xml">
+            <form string="Type Of Services">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="helpdesk_service_action" model="ir.actions.act_window">
+        <field name="name">Type Of Services</field>
+        <field name="res_model">helpdesk.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No Services found. Let's create one!
+          </p><p>
+            Services are perfect for organizing your solution.
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="helpdesk_service_menu" action="helpdesk_service_action"
+        sequence="1" parent="helpdesk.helpdesk_menu_config"
+        groups="base.group_no_one"/>
     </data>
 </odoo>
