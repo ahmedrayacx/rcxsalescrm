@@ -11,6 +11,7 @@
                     <field name="existingclient" widget="boolean_toggle"/>
                     <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                     <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 </xpath>
                 <xpath expr="//div[@name='button_box']" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -104,6 +105,58 @@
         </record>
 
 
+
+        <record id="contact_deliverysite_view_tree" model="ir.ui.view">
+            <field name="name">contact.deliverysite.tree</field>
+            <field name="model">contact.deliverysite</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Delivery Site" sample="1" multi_edit="1">
+                    <field name="name"/>
+                    <field name="color" widget="color_picker"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="contact_deliverysite_view_form" model="ir.ui.view">
+            <field name="name">contact.deliverysite.form</field>
+            <field name="model">contact.deliverysite</field>
+            <field name="arch" type="xml">
+                <form string="Delivery Site">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="color" widget="color_picker"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="contact_deliverysite_action" model="ir.actions.act_window">
+            <field name="name">deliverysite</field>
+            <field name="res_model">contact.deliverysite</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Delivery Site found. Let's create one!
+                </p>
+                <p>
+                    Deliverysite are perfect for organizing your solution.
+                </p>
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
         <menuitem id="menu_partner_master_data"
                   name="Master Data" parent="contacts.res_partner_menu_config"
                   sequence="4"/>
@@ -118,6 +171,10 @@
                   name="Market" parent="menu_partner_master_data"
                   sequence="2"/>
 
+        <menuitem id="menu_partner_ob_status"
+                  action="contact_deliverysite_action"
+                  name="Delivery Site" parent="menu_partner_master_data"
+                  sequence="3"/>
 
     </data>
 </odoo>
