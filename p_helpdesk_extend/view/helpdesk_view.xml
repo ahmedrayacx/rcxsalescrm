@@ -6,6 +6,15 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="before">
+                   <field name="codeName"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_phone']" position="before">
+                    <field name="existingclient" widget="boolean_toggle"/>
+                    <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </xpath>
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field name="is_IT" invisible="1"/>
                     <field name="ticketType" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
@@ -38,10 +47,7 @@
                     <field name="rfp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="codeName"/>
-                    <field name="existingclient" widget="boolean_toggle"/>
-                    <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                 
                 </xpath>
             </field>
         </record>
