@@ -166,12 +166,12 @@
                   name="Type Of Service" parent="menu_partner_master_data"
                   sequence="1"/>
 
-        <menuitem id="menu_partner_ob_status"
+        <menuitem id="menu_partner_market"
                   action="contact_market_action"
                   name="Market" parent="menu_partner_master_data"
                   sequence="2"/>
 
-        <menuitem id="menu_partner_ob_status"
+        <menuitem id="menu_partner_deliverysite"
                   action="contact_deliverysite_action"
                   name="Delivery Site" parent="menu_partner_master_data"
                   sequence="3"/>
