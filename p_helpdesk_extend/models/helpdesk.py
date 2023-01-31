@@ -113,8 +113,6 @@ class Helpdesk_ticket(models.Model):
                 rec.is_IT = False
 
 
-
-
 class HelpdeskService(models.Model):
     _name = 'helpdesk.service'
     _description = 'IT Service'
@@ -129,4 +127,8 @@ class HelpdeskService(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "IT Service name already exists !"),
     ]
-    
+
+class HelpdeskTeam(models.Model):
+    _inherit = 'helpdesk.team'
+
+    security_role_ids = fields.Many2many('security.role')

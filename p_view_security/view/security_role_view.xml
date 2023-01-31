@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+        <record id="security_role_form_view" model="ir.ui.view">
+            <field name="name">Security Role Form</field>
+            <field name="model">security.role</field>
+            <field name="arch" type="xml">
+                <form string="Security Role">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="parent_id"/>
+                                <field name="user_ids" widget="many2many_tags"
+                                       attrs="{'invisible': [('group_id', '=', False)], 'required': [('group_id', '!=', False)]}"/>
+                                <field name="group_id" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="security_role_tree_view" model="ir.ui.view">
+            <field name="name">Security Role Tree</field>
+            <field name="model">security.role</field>
+            <field name="arch" type="xml">
+                <tree string="Security Role">
+                    <field name="name" required="1"/>
+                    <field name="parent_id"/>
+                    <field name="user_ids" widget="many2many_tags"/>
+                    <field name="group_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='security_role_action' model='ir.actions.act_window'>
+            <field name='name'>Security Roles</field>
+            <field name="res_model">security.role</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="security_view_fields_form_view" model="ir.ui.view">
+            <field name="name">Security View Fields Form</field>
+            <field name="model">security.view.fields</field>
+            <field name="arch" type="xml">
+                <form string="Security View Fields">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="model_id" required="1"/>
+                                <field name="field_id" domain="[('model_id', '=',model_id)]"/>
+                                <field name="security_role_ids" widget="many2many_tags"/>
+                                <field name="group_ids" widget="many2many_tags" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="security_view_fields_tree_view" model="ir.ui.view">
+            <field name="name">Security View Fields Tree</field>
+            <field name="model">security.view.fields</field>
+            <field name="arch" type="xml">
+                <tree string="Security View Fields">
+                    <field name="model_id" required="1"/>
+                    <field name="field_id"/>
+                    <field name="security_role_ids" widget="many2many_tags"/>
+                    <field name="group_ids" widget="many2many_tags" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='security_view_fields_action' model='ir.actions.act_window'>
+            <field name='name'>Security View Fields</field>
+            <field name="res_model">security.view.fields</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="security_role_root" parent="helpdesk.menu_helpdesk_root"
+                  name="Security" groups="base.group_no_one"/>
+
+        <menuitem id="security_role_menu" parent="security_role_root" action="security_role_action"
+                  name="Roles" sequence="1" groups="base.group_no_one"/>
+
+        <menuitem id="security_view_fields_menu" parent="security_role_root"
+                  action="security_view_fields_action"
+                  name="Fields" sequence="2" groups="base.group_no_one"/>
+
+        <record id="base.action_res_groups" model="ir.actions.act_window">
+            <field name="domain">[('is_security_role', '=', False)]</field>
+        </record>
+    </data>
+</odoo>

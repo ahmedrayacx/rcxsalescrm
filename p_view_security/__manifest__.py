@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 # Part of Param Enterprice. See LICENSE file for full copyright and licensing details.
 {
-    'name': "Helpdesk Extend",
+    'name': "View Security",
     'version': '15.0.1',
-    'author': "Helpdesk Enterprice",
+    'author': "Param Enterprice",
     'category': 'Tools',
-    'summary': 'Helpdesk Extend',
-    'description': 'Helpdesk Extend',
+    'summary': 'View Security',
+    'description': 'View Security',
     'depends': [
-        'base',
-        'helpdesk',
-        'p_contact_extend',
-        'p_view_security'
+        'base', 'helpdesk'
     ],
     'data': [
         'security/ir.model.access.csv',
-        'view/helpdesk_view.xml',
+        'view/security_role_view.xml',
     ],
     'installable': True,
     'auto_install': False,
