@@ -22,7 +22,8 @@ class Helpdesk_ticket(models.Model):
     numberofLicenses = fields.Char(
         "Number of Licenses / Ports"
     )
-    attachment = fields.Binary(string='Attachment')
+    available_users_ids = fields.Many2many('res.users', compute="compute_available_users")
+    attachment = fields.Many2many('ir.attachment', string='Attachments')
     #whatsApp = fields.Boolean(string="WhatsApp", default=False)
     #soicalmedia = fields.Boolean(string="Social Media", default=False)
     #webChat = fields.Boolean(string="WebChat", default=False)
@@ -74,6 +75,10 @@ class Helpdesk_ticket(models.Model):
     deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
     service_ids = fields.Many2many('helpdesk.service', string='Service')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
+
+    def compute_available_users(self):
+        for rec in self:
+            rec.available_users_ids = rec.team_id.security_role_ids.mapped('group_id').mapped('users')
 
     @api.onchange('codeName')
     def onchange_codename_partner(self):

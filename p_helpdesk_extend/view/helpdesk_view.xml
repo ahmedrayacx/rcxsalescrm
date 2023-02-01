@@ -46,7 +46,6 @@
                     <field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="numberofLicenses" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="pendingstage" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="attachment" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
@@ -57,6 +56,17 @@
                     <field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                  
+                </xpath>
+                <xpath expr="//group[1]" position="after">
+                    <group>
+                        <field name="attachment" widget="many2many_binary" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="available_users_ids" widget="many2many_tags" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', available_users_ids)]</attribute>
                 </xpath>
             </field>
         </record>
