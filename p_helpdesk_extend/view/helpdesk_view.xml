@@ -13,7 +13,8 @@
                             <div class="text-muted">
                                 Security Roles to whom this team will be visible
                             </div>
-                            <field name="security_role_ids" widget="many2many_tags" class="mt16" placeholder="Add Roles..."/>
+                            <field name="security_role_ids" widget="many2many_tags" class="mt16"
+                                   placeholder="Add Roles..."/>
                         </div>
                     </div>
                 </xpath>
@@ -24,24 +25,25 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="before">
-                   <field name="codeName"/>
-            </xpath>
-            <xpath expr="//field[@name='partner_phone']" position="before">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="codeName"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_phone']" position="before">
                     <field name="existingclient" widget="boolean_toggle"/>
                     <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-            </xpath>
+                </xpath>
                 <xpath expr="//field[@name='team_id']" position="attributes">
-                    <attribute name="domain">[('security_role_ids.group_id.users', 'in', create_uid)]</attribute>
+                    <attribute name="domain">[('security_role_ids.group_id.users', 'in', uid)]</attribute>
                 </xpath>
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field name="create_uid" invisible="1"/>
                     <field name="is_IT" invisible="1"/>
                     <field name="ticketType" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="service_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                                       
+                    <field name="service_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+                           attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+
 
                     <field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     <field name="numberofLicenses" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
@@ -55,11 +57,12 @@
                     <field name="rfp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                 
+
                 </xpath>
                 <xpath expr="//group[1]" position="after">
                     <group>
-                        <field name="attachment" widget="many2many_binary" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                        <field name="attachment" widget="many2many_binary"
+                               attrs="{'invisible': [('is_IT', '!=', True)]}"/>
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position="before">
@@ -82,54 +85,77 @@
         </record>
 
 
+        <record id="helpdesk_service_view_tree" model="ir.ui.view">
+            <field name="name">helpdesk.service.tree</field>
+            <field name="model">helpdesk.service</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="IT Service" sample="1" multi_edit="1">
+                    <field name="name"/>
+                    <field name="color" widget="color_picker"/>
+                </tree>
+            </field>
+        </record>
 
-
-
-
-
-<record id="helpdesk_service_view_tree" model="ir.ui.view">
-        <field name="name">helpdesk.service.tree</field>
-        <field name="model">helpdesk.service</field>
-        <field name="arch" type="xml">
-            <tree editable="top" string="IT Service" sample="1" multi_edit="1">
-                <field name="name"/>
-                <field name="color" widget="color_picker"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="helpdesk_service_view_form" model="ir.ui.view">
-        <field name="name">helpdesk.service.form</field>
-        <field name="model">helpdesk.service</field>
-        <field name="arch" type="xml">
-            <form string="Type Of Services">
-                <sheet>
-                    <group>
+        <record id="helpdesk_service_view_form" model="ir.ui.view">
+            <field name="name">helpdesk.service.form</field>
+            <field name="model">helpdesk.service</field>
+            <field name="arch" type="xml">
+                <form string="Type Of Services">
+                    <sheet>
                         <group>
-                            <field name="name"/>
-                            <field name="color" widget="color_picker"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="color" widget="color_picker"/>
+                            </group>
                         </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
-    <record id="helpdesk_service_action" model="ir.actions.act_window">
-        <field name="name">Type Of Services</field>
-        <field name="res_model">helpdesk.service</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">
-            No Services found. Let's create one!
-          </p><p>
-            Services are perfect for organizing your solution.
-          </p>
-        </field>
-    </record>
+        <record id="helpdesk_service_action" model="ir.actions.act_window">
+            <field name="name">Type Of Services</field>
+            <field name="res_model">helpdesk.service</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Services found. Let's create one!
+                </p>
+                <p>
+                    Services are perfect for organizing your solution.
+                </p>
+            </field>
+        </record>
 
-    <menuitem id="helpdesk_service_menu" action="helpdesk_service_action"
-        sequence="1" parent="helpdesk.helpdesk_menu_config"
-        groups="base.group_no_one"/>
+        <menuitem id="helpdesk_service_menu" action="helpdesk_service_action"
+                  sequence="1" parent="helpdesk.helpdesk_menu_config"
+                  groups="base.group_no_one"/>
     </data>
+
+
+    <record id="helpdesk.helpdesk_team_dashboard_action_main" model="ir.actions.act_window">
+        <field name="domain">[('security_role_ids.group_id.users', 'in', uid)]</field>
+    </record>
+
+    <record id="helpdesk_security_role_form_view" model="ir.ui.view">
+        <field name="name">Security Role Form Inherit</field>
+        <field name="model">security.role</field>
+        <field name="inherit_id" ref="p_view_security.security_role_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="after">
+                <field name="team_ids" widget="many2many_tags" string="Support Teams"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="helpdesk_security_role_tree_view" model="ir.ui.view">
+        <field name="name">Security Role Tree Inherit</field>
+        <field name="model">security.role</field>
+        <field name="inherit_id" ref="p_view_security.security_role_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="team_ids" widget="many2many_tags" string="Support Teams"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

@@ -136,4 +136,9 @@ class HelpdeskService(models.Model):
 class HelpdeskTeam(models.Model):
     _inherit = 'helpdesk.team'
 
-    security_role_ids = fields.Many2many('security.role')
+    security_role_ids = fields.Many2many('security.role', 'rel_helpdesk_team_security_role')
+
+class Security_Role(models.Model):
+    _inherit = 'security.role'
+
+    team_ids = fields.Many2many('helpdesk.team', 'rel_helpdesk_team_security_role')

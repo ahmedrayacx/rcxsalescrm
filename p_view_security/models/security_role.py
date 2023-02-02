@@ -8,7 +8,16 @@ class SecurityRole(models.Model):
     name = fields.Char("Role Name", copy=False)
     parent_id = fields.Many2one('security.role', string="Parent Role")
     group_id = fields.Many2one('res.groups', copy=False, ondelete='cascade')
-    user_ids = fields.Many2many('res.users', string="Users", readonly=False, store=True)
+    user_ids = fields.Many2many('res.users', string="Users", readonly=False, compute="compute_users",
+                                inverse="inverse_users")
+
+    def compute_users(self):
+        for rec in self:
+            rec.user_ids = [(6, 0, rec.group_id.users.ids)]
+
+    def inverse_users(self):
+        for rec in self:
+            rec.group_id.users = [(6, 0, rec.user_ids.ids)]
 
     @api.model
     def create(self, vals):
@@ -39,8 +48,7 @@ class SecurityRole(models.Model):
         self.ensure_one()
         vals = {
             'name': 'manually_' + self.name,
-            'is_security_role': True,
-            'users': [(6, 0, self.user_ids.ids)]
+            'is_security_role': True
         }
         child_role_ids = self.env['security.role'].sudo().search([('parent_id', '=', self.id)])
         if child_role_ids:
