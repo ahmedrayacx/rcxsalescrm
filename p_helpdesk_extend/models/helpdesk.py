@@ -67,6 +67,7 @@ class Helpdesk_ticket(models.Model):
     rfpontime = fields.Boolean(string="RFP (On-time)?", default=False)
     date_received = fields.Date(string="Date Received")
     date_closed = fields.Date(string="Date Closed")
+    due_date = fields.Date(string="Due Date")
     noofFTEs = fields.Char("No Of FTEs")
 
     codeName = fields.Char("Code Name")
