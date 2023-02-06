@@ -53,6 +53,7 @@
                     <field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
+                    <field name="due_date" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="presalesstatus" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
                     <field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}"/>
@@ -61,8 +62,7 @@
                 </xpath>
                 <xpath expr="//group[1]" position="after">
                     <group>
-                        <field name="attachment" widget="many2many_binary"
-                               attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                        <field name="attachment" widget="many2many_binary"/>
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position="before">
