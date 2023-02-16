@@ -23,7 +23,7 @@ class Helpdesk_ticket(models.Model):
         "Number of Licenses / Ports"
     )
     available_users_ids = fields.Many2many('res.users', compute="compute_available_users")
-    attachment = fields.Many2many('ir.attachment', string='Attachments')
+    ticket_attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
     #whatsApp = fields.Boolean(string="WhatsApp", default=False)
     #soicalmedia = fields.Boolean(string="Social Media", default=False)
     #webChat = fields.Boolean(string="WebChat", default=False)
@@ -117,6 +117,15 @@ class Helpdesk_ticket(models.Model):
                 rec.is_IT = True
             else:
                 rec.is_IT = False
+
+    @api.model
+    def create(self, vals):
+        call_super = super(Helpdesk_ticket, self).create(vals)
+        for rec in call_super:
+            for att in rec.ticket_attachment_ids:
+                if not att.res_id or att.res_id == 0:
+                    att.res_id = rec.id
+        return call_super
 
 
 class HelpdeskService(models.Model):

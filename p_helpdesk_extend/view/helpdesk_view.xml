@@ -62,7 +62,7 @@
                 </xpath>
                 <xpath expr="//group[1]" position="after">
                     <group>
-                        <field name="attachment" widget="many2many_binary"/>
+                        <field name="ticket_attachment_ids" widget="many2many_binary"/>
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position="before">
