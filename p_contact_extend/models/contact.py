@@ -8,7 +8,6 @@ class Partner_inherit(models.Model):
     _inherit = 'res.partner'
 
     codeName = fields.Char("Code Name")
-    contractrenewaldate = fields.Date(string="Contract Renewal Date")
     type_of_service_ids = fields.Many2many('contact.typeofservice', string='Type Of Service')
     market_ids = fields.Many2many('contact.market', string='Market')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
