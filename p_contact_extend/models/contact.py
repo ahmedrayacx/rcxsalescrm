@@ -12,7 +12,31 @@ class Partner_inherit(models.Model):
     market_ids = fields.Many2many('contact.market', string='Market')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
     deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
-    
+
+
+    contract_renewal_date = fields.Date(string="Contract Renewal Date")
+    account_launch_date = fields.Date(string="Account Launch Date")
+    contract_beginning_date = fields.Date(string="Contract Beginning Date")
+    contract_end_date = fields.Date(string="Contract End Date")
+    percentage_of_increase = fields.Float(string="Percentage Of Increase %")
+    termination_period_inmonth = fields.Float(string="Termination period In Month %")
+
+    payment_lead_time = fields.Datetime(string="Payment Lead Iime")
+    contract_renewal_date =fields.Date(string="Contract renewal Date")
+    penalties = fields.Char("Penalties")
+    rewards = fields.Char("Rewards")
+    account_headcount = fields.Char("Account Headcount")
+    short_number  = fields.Char("Short Number")
+    working_hours_from = fields.Datetime("From")
+    working_hours_to = fields.Datetime("To")
+    wfh = fields.Char("WFH %")
+    payment_model = fields.Char("Payment Model")
+    currency_type = fields.Char("Currency Type")
+    power_pi_link = fields.Char("Power PI Link")
+    power_pi_user_name = fields.Char("Power PI Link")
+
+
+
     _sql_constraints = [
         ('name_uniq', 'unique (codeName)', "Code Name name already exists !"),
     ]
@@ -64,3 +88,4 @@ class ContactDeliverySite(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Delivery Site name already exists !"),
     ]
+    
