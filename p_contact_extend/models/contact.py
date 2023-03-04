@@ -18,8 +18,8 @@ class Partner_inherit(models.Model):
     account_launch_date=fields.Date(string="Account Launch Date")
     contract_beginning_date=fields.Date(string="Contract Beginning Date")
     contract_end_date=fields.Date(string="Contract End Date")
-    percentage_of_increase=fields.Float(string="Percentage Of Increase %")
-    termination_period_inmonth=fields.Float(string="Termination period In Month %")
+   # percentage_of_increase=fields.Float(string="Percentage Of Increase %")
+    #termination_period_inmonth=fields.Float(string="Termination period In Month %")
 
     payment_lead_time=fields.Datetime(string="Payment Lead Iime")
     contract_renewal_date =fields.Date(string="Contract renewal Date")
