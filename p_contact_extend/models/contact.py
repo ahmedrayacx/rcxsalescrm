@@ -22,7 +22,6 @@ class Partner_inherit(models.Model):
     termination_period_inmonth = fields.Float(string="Termination period In Month %")
 
     payment_lead_time = fields.Datetime(string="Payment Lead Iime")
-    contract_renewal_date =fields.Date(string="Contract renewal Date")
     penalties = fields.Char("Penalties")
     rewards = fields.Char("Rewards")
     account_headcount = fields.Char("Account Headcount")
