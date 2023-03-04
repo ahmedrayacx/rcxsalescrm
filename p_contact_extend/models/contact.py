@@ -12,13 +12,7 @@ class Partner_inherit(models.Model):
     market_ids = fields.Many2many('contact.market', string='Market')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
     deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
-
-
-    contract_renewal_date = fields.Date(string="Contract Renewal Date")
- 
-
-
-
+    
     _sql_constraints = [
         ('name_uniq', 'unique (codeName)', "Code Name name already exists !"),
     ]
@@ -70,4 +64,3 @@ class ContactDeliverySite(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Delivery Site name already exists !"),
     ]
-    
