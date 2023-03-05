@@ -30,7 +30,7 @@ class Partner_inherit(models.Model):
     payment_model = fields.Char('Payment Model')
     currency_type = fields.Char('Currency Type')
     power_pi_link = fields.Char('Power PI Link')
-    power_pi_user_name = fields.Char('Power PI Link')
+    power_pi_user_name = fields.Char('Power User Name')
 
 
     _sql_constraints = [
