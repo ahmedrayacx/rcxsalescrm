@@ -13,6 +13,20 @@
                     <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="contract_renewal_date" />
+                    <field name="percentage_of_increase" />
+                    <field name="termination_period_inmonth" />
+                    <field name="payment_lead_time" />
+                    <field name="penalties" />
+                    <field name="rewards" />
+                    <field name="account_headcount" />
+                    <field name="short_number" />
+                    <field name="working_hours_from" />
+                    <field name="working_hours_to" />
+                    <field name="wfh" />
+                    <field name="payment_model" />
+                    <field name="currency_type" />
+                    <field name="power_pi_link" />
+                    <field name="power_pi_user_name" />
 
                 </xpath>
                 <xpath expr="//div[@name='button_box']" position="attributes">
