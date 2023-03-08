@@ -28,7 +28,8 @@
                            options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
                     <field name="power_pi_link" />
                     <field name="power_pi_user_name" />
-
+                    <field name="gp" />
+                    <field name="eat" />
                 </xpath>
                 <xpath expr="//div[@name='button_box']" position="attributes">
                     <attribute name="invisible">1</attribute>
