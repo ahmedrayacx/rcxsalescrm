@@ -92,4 +92,15 @@ class ContactDeliverySite(models.Model):
 
 
 
-    
+class contact_currency(models.Model):
+    _name = 'contact.currency'
+    _description = "Contact Currency"
+
+    name = fields.Char(
+        "Name",
+        required=True
+    )
+    active = fields.Boolean(
+        "Active",
+        default=True,
+    )
