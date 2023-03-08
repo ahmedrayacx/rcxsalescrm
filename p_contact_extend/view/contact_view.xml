@@ -24,7 +24,7 @@
                     <field name="working_hours_to" />
                     <field name="wfh" />
                     <field name="payment_model" />
-                    <field name="currency_type" />
+                    <field name="currency_id" />
                     <field name="power_pi_link" />
                     <field name="power_pi_user_name" />
 
@@ -166,6 +166,47 @@
 
 
 
+ <record id="view_contact_currency_view_tree" model="ir.ui.view">
+            <field name="name">contact.currency.tree</field>
+            <field name="model">contact.currency</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Currency Type" sample="1" multi_edit="1">
+                    <field name="name"/>
+                    <field name="color" widget="color_picker"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_contact_currency_view_form" model="ir.ui.view">
+            <field name="name">contact.currency.form</field>
+            <field name="model">contact.currency</field>
+            <field name="arch" type="xml">
+                <form string="Currency Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="color" widget="color_picker"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="contact_currency_action" model="ir.actions.act_window">
+            <field name="name">Currency Type</field>
+            <field name="res_model">contact.currency</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Currency found. Let's create one!
+                </p>
+                <p>
+                     Currency are perfect for organizing your solution.
+                </p>
+            </field>
+        </record>
 
 
 
@@ -191,6 +232,13 @@
                   action="contact_deliverysite_action"
                   name="Delivery Site" parent="menu_partner_master_data"
                   sequence="3"/>
+
+        <menuitem id="menu_partner_currency"
+                  action="contact_currency_action"
+                  name="Currency" parent="menu_partner_master_data"
+                  sequence="4"/>
+
+                  
 
     </data>
 </odoo>
