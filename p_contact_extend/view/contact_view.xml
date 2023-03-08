@@ -24,7 +24,7 @@
                     <field name="working_hours_to" />
                     <field name="wfh" />
                     <field name="payment_model" />
-                    <field name="currency_id" widget="many2one" />
+                    
                     <field name="power_pi_link" />
                     <field name="power_pi_user_name" />
 
