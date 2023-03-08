@@ -218,7 +218,7 @@
         
 
        <menuitem id="menu_partner_currency"
-                  action="contact_currency_action"
+                  action="action_contact_currency"
                   name="Currency" parent="menu_partner_master_data"
                   sequence="4"/>
 
