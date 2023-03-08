@@ -2,4 +2,3 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_contact_typeofservice,contact.typeofservice,model_contact_typeofservice,base.group_user,1,1,1,1
 access_contact_market,helpdesk.market,model_contact_market,base.group_user,1,1,1,1
 access_contact_deliverysite,helpdesk.deliverysite,model_contact_deliverysite,base.group_user,1,1,1,1
-access_contact_currency,contact.currency,model_contact_currency,base.group_user,1,1,1,1
