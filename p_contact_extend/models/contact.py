@@ -28,7 +28,7 @@ class Partner_inherit(models.Model):
     working_hours_to = fields.Datetime('To')
     wfh = fields.Char('WFH %')
     payment_model = fields.Char('Payment Model')
-    currency_id =   fields.Many2many('contact.currency', string='Currency Type')
+    currency_id =   fields.Many2one('contact.currency', string='Currency Type')
     power_pi_link = fields.Char('Power PI Link')
     power_pi_user_name = fields.Char('Power User Name')
     gp = fields.Char('GP %')
