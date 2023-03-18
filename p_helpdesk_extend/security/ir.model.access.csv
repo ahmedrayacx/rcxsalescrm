@@ -1,3 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_helpdesk_service,helpdesk.service,model_helpdesk_service,base.group_user,1,1,1,1
-access_helpdesk_service_portal,helpdesk.service.portal,model_helpdesk_service,base.group_portal,1,0,0,0

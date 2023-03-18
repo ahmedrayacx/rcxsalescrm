@@ -8,7 +8,6 @@ class Helpdesk_ticket(models.Model):
     _inherit = 'helpdesk.ticket'
 
     is_IT = fields.Boolean(compute='compute_is_IT')
-    is_helpdesk = fields.Boolean(related="team_id.is_helpdesk")
     ticketType = fields.Selection([('inquery', 'Inquery'), ('requestsolution', 'Request Solution')],
                                   string='Ticket Type')
     #voice = fields.Boolean(string="Voice", default=False)
@@ -77,17 +76,6 @@ class Helpdesk_ticket(models.Model):
     deliverysite_ids = fields.Many2many('contact.deliverysite', string='Delivery Site')
     service_ids = fields.Many2many('helpdesk.service', string='Service')
     existingclient = fields.Boolean(string="Existing Client ?", default=False)
-    team_ids = fields.Many2many('helpdesk.team', compute="compute_available_team_ids")
-
-    @api.depends('team_id')
-    def compute_available_team_ids(self):
-        for rec in self:
-            domain = ['|', ('security_role_ids', '=', False),
-                            ('security_role_ids.group_id.users', 'in', self.env.user.id)]
-
-            is_helpdesk = self._context.get('show_only_helpdesk', False)
-            domain.append(('is_helpdesk', '=', is_helpdesk))
-            rec.team_ids = self.env['helpdesk.team'].search(domain)
 
     def compute_available_users(self):
         for rec in self:
@@ -158,7 +146,6 @@ class HelpdeskService(models.Model):
 class HelpdeskTeam(models.Model):
     _inherit = 'helpdesk.team'
 
-    is_helpdesk = fields.Boolean("")
     security_role_ids = fields.Many2many('security.role', 'rel_helpdesk_team_security_role')
 
 class Security_Role(models.Model):

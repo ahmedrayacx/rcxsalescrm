@@ -15,17 +15,8 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'security/helpdesk_security.xml',
         'view/helpdesk_view.xml',
     ],
-    'assets': {
-        'web.assets_backend': [
-            'p_helpdesk_extend/static/src/js/chatter.js',
-        ],
-        'web.assets_qweb': [
-            'p_helpdesk_extend/static/src/xml/*.xml',
-        ],
-    },
     'installable': True,
     'auto_install': False,
     'license': 'LGPL-3'
