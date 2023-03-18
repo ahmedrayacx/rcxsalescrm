@@ -119,9 +119,6 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem action="action_site_extra_data" name="Extra Site Items" id="menu_extra_site_items"
-                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="40"/>
-
         <record id="view_type_extra_data_search" model="ir.ui.view">
             <field name="name">support.extra.type.search.view</field>
             <field name="model">support.extra.type</field>
@@ -189,9 +186,6 @@
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
         </record>
-
-        <menuitem action="action_type_extra_data" name="Extra Type Items" id="menu_extra_type_items"
-                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="41"/>
 
         <record id="view_child_team_search" model="ir.ui.view">
             <field name="name">helpdesk.team.child.search.view</field>
@@ -264,9 +258,6 @@
             <field name="domain">[('team_id.is_helpdesk', '=', False)]</field>
             <field name="view_mode">tree,form</field>
         </record>
-
-        <menuitem action="action_helpdesk_child_team_data" name="Sub-Team" id="menu_helpdesk_child_team"
-                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="42"/>
 
         <record id="view_partner_form" model="ir.ui.view">
             <field name="name">res.partner.view.inherit.form.custom</field>

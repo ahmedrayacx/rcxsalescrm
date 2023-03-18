@@ -249,5 +249,15 @@
                   sequence="20" parent="p_website_helpdesk_extend.new_helpdesk_ticket_menu_main"
                   groups="p_website_helpdesk_extend.group_helpdesk_ticket"/>
 
+        <menuitem action="action_site_extra_data" name="Extra Site Items" id="menu_extra_site_items"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="40"/>
+
+        <menuitem action="action_type_extra_data" name="Extra Type Items" id="menu_extra_type_items"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="41"/>
+
+        <menuitem action="action_helpdesk_child_team_data" name="Sub-Team" id="menu_helpdesk_child_team"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="42"/>
+
+
     </data>
 </odoo>
