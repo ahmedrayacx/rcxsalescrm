@@ -7,7 +7,7 @@
             <field name="secret_key">-nP8Q~tNxTvEY2eXEhS0KyXBBwS970xkeSWm5bdz</field>
             <field name="enabled">True</field>
             <field name="auth_endpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</field>
-            <field name="scope">offline_access User.Read Mail.Read User.ReadWrite.All Contacts.ReadWrite Calendars.ReadWrite</field>
+            <field name="scope"> User.Read Mail.Read </field>
             <field name="validation_endpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</field>
             <field name="data_endpoint">graph.microsoft.com</field>
             <field name="body">Log in with Microsoft</field>

@@ -20,49 +20,67 @@
                 </xpath>
             </field>
         </record>
+
         <record id="view_helpdesk_form" model="ir.ui.view">
             <field name="name">res.helpdesk.ticket.inherit.form.custom</field>
             <field name="model">helpdesk.ticket</field>
+            <field name="mode">extension</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="before">
-                    <field name="codeName"/>
+                    <field name="codeName" attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
                 </xpath>
                 <xpath expr="//field[@name='partner_phone']" position="before">
-                    <field name="existingclient" widget="boolean_toggle"/>
+                    <field name="existingclient" widget="boolean_toggle"
+                           attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
+                    <field name="team_ids" invisible="1"/>
                     <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 </xpath>
                 <xpath expr="//field[@name='team_id']" position="attributes">
-                    <attribute name="domain">[('security_role_ids.group_id.users', 'in', uid)]</attribute>
+                    <attribute name="domain">[('id', 'in', team_ids)]</attribute>
                 </xpath>
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field name="create_uid" invisible="1"/>
                     <field name="is_IT" invisible="1"/>
-                    <field name="ticketType" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                    <field name="ticketType"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '!=', True)]}"/>
                     <field name="service_ids" widget="many2many_tags" options="{'color_field': 'color'}"
-                           attrs="{'invisible': [('is_IT', '!=', True)]}"/>
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '!=', True)]}"/>
 
 
-                    <field name="transactions" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="numberofLicenses" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="pendingstage" attrs="{'invisible': [('is_IT', '!=', True)]}"/>
-                    <field name="industry" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="solution" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="noofFTEs" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="date_received" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="date_closed" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="due_date" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="presalesstatus" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="rfp" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="rfpsubmissiondate" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-                    <field name="rfpontime" widget="boolean_toggle" attrs="{'invisible': [('is_IT', '=', True)]}"/>
-
+                    <field name="transactions"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '!=', True)]}"/>
+                    <field name="numberofLicenses"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '!=', True)]}"/>
+                    <field name="pendingstage"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '!=', True)]}"/>
+                    <field name="industry"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="solution"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="noofFTEs"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="date_received"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="date_closed"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="due_date"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="presalesstatus"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="rfp" widget="boolean_toggle"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="rfpsubmissiondate"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
+                    <field name="rfpontime" widget="boolean_toggle"
+                           attrs="{'invisible': ['|', '|', ('team_id', '=', False), ('is_helpdesk', '=', True), ('is_IT', '=', True)]}"/>
                 </xpath>
                 <xpath expr="//group[1]" position="after">
                     <group>
-                        <field name="ticket_attachment_ids" widget="many2many_binary"/>
+                        <field name="ticket_attachment_ids" widget="many2many_binary"
+                               attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position="before">
@@ -76,6 +94,7 @@
 
         <record id="helpdesk.menu_helpdesk_root" model="ir.ui.menu">
             <field name="name">Solutions Request</field>
+            <field name="groups_id" eval="[(6, 0, [ref('p_helpdesk_extend.group_support_ticket')])]"/>
         </record>
         <record id="helpdesk.helpdesk_team_menu" model="ir.ui.menu">
             <field name="name">Solutions Request Team</field>
@@ -132,11 +151,6 @@
                   groups="base.group_no_one"/>
     </data>
 
-
-    <record id="helpdesk.helpdesk_team_dashboard_action_main" model="ir.actions.act_window">
-        <field name="domain">[('security_role_ids.group_id.users', 'in', uid)]</field>
-    </record>
-
     <record id="helpdesk_security_role_form_view" model="ir.ui.view">
         <field name="name">Security Role Form Inherit</field>
         <field name="model">security.role</field>
@@ -157,5 +171,31 @@
                 <field name="team_ids" widget="many2many_tags" string="Support Teams"/>
             </xpath>
         </field>
+    </record>
+
+    <record id="helpdesk.helpdesk_team_dashboard_action_main" model="ir.actions.act_window">
+        <field name="domain">['&amp;','|', ('security_role_ids', '=', False), ('security_role_ids.group_id.users', 'in', uid), ('is_helpdesk', '=', False)]
+        </field>
+    </record>
+
+    <record id="helpdesk.helpdesk_team_action" model="ir.actions.act_window">
+        <field name="domain">[('is_helpdesk', '=', False)]</field>
+        <field name="name">Solution Teams</field>
+    </record>
+
+    <record id="helpdesk.helpdesk_ticket_analysis_action" model="ir.actions.act_window">
+        <field name="domain">['&amp;','|', ('team_id.security_role_ids', '=', False), ('team_id.security_role_ids.group_id.users', 'in', uid), ('team_id.is_helpdesk','=', False)]</field>
+    </record>
+
+    <record id="helpdesk.helpdesk_sla_report_analysis_action" model="ir.actions.act_window">
+        <field name="domain">['&amp;','|', ('team_id.security_role_ids', '=', False), ('team_id.security_role_ids.group_id.users', 'in', uid), ('team_id.is_helpdesk','=', False)]</field>
+    </record>
+
+    <record id="helpdesk.helpdesk_ticket_action_main_my" model="ir.actions.act_window">
+        <field name="domain">['&amp;','|', ('team_id.security_role_ids', '=', False), ('team_id.security_role_ids.group_id.users', 'in', uid), ('team_id.is_helpdesk', '=', False)]</field>
+    </record>
+
+    <record id="helpdesk.helpdesk_ticket_action_main_tree" model="ir.actions.act_window">
+        <field name="domain">['&amp;','|', ('team_id.security_role_ids', '=', False), ('team_id.security_role_ids.group_id.users', 'in', uid), ('team_id.is_helpdesk', '=', False)]</field>
     </record>
 </odoo>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="support_ticket_view" name="Support Ticket">
+            <t t-call="website.layout">
+                <t t-set="additional_title">Support Ticket</t>
+                <div class="oe_structure oe_empty" id="support_ticket_1"/>
+                <div class="container mt16 mb32">
+                    <form action="" class="support-ticket" t-att-action="form_action" method="post"
+                          enctype="multipart/form-data" novalidate="">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="card-title">Ticket Details</h2>
+                                        <div class="form-group">
+                                            <label for="team_id">Team</label>
+                                            <br/>
+                                            <div class="form-check-inline form-check">
+                                                <t t-foreach="team_ids or []" t-as="team_data">
+                                                    <input type="radio" class="form-control form-check-input"
+                                                           t-att-id="'team_id' + str(team_data['id'])" name="team_id"
+                                                           t-att-value="team_data['id']" required="1" selected="0"/>
+                                                    <label class="radio-label"
+                                                           t-att-for="'team_id' + str(team_data['id'])" t-att-style="'background:' + (team_data['portal_color_code'] if team_data['portal_color_code'] else 'green')">
+                                                        <t t-esc="team_data['name']"/>
+                                                    </label>
+                                                </t>
+                                                <div class="valid-feedback">Team is valid!</div>
+                                                <div class="invalid-feedback">Team cannot be blank!</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="support_type_id">Type</label>
+                                            <select id="support_type_id" name="type_id" required="1" value=""
+                                                    class="form-control">
+                                                <option value="" team="" selected="">---Select Type---</option>
+                                                <t t-foreach="type_ids or []" t-as="type_data">
+                                                    <option class="d-none" t-att-team="type_data['team']"
+                                                            t-att-value="type_data['id']">
+                                                        <t t-esc="type_data['name']"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                            <div class="valid-feedback">Type is valid!</div>
+                                            <div class="invalid-feedback">Type cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Subject</label>
+                                            <input type="text" id="name" name="name" placeholder="Enter Subject"
+                                                   value=""
+                                                   class="form-control"
+                                                   required="1"/>
+                                            <div class="valid-feedback">Subject is valid!</div>
+                                            <div class="invalid-feedback">Subject cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <textarea id="description" name="description" rows="3"
+                                                      placeholder="Enter Ticket Description"
+                                                      value=""
+                                                      class="form-control"
+                                                      required="1"/>
+                                            <div class="valid-feedback">Description is valid!</div>
+                                            <div class="invalid-feedback">Description cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="file">Attachments</label>
+                                            <input class="form-control" id="file" type="file" name="attachments"
+                                                   multiple=""/>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="card-title">User Details</h2>
+                                        <div class="form-group">
+                                            <label for="id1">HRID</label>
+                                            <input type="text" id="hrid" name="hrid" placeholder="Enter HRID"
+                                                   t-att-value="default_hrid"
+                                                   class="form-control"
+                                                   required="1"/>
+                                            <div class="valid-feedback">HRID is valid!</div>
+                                            <div class="invalid-feedback">HRID cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="support_site_id">Site</label>
+                                            <select id="support_site_id" name="site_id" required="1"
+                                                    class="form-control">
+                                                <option value="">---Select Site---</option>
+                                                <t t-foreach="site_ids or []" t-as="site_data">
+                                                    <option t-att-selected="site_data['id'] == default_site_id if default_site_id else 0"
+                                                            t-att-value="site_data['id']">
+                                                        <t t-esc="site_data['name']"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                            <div class="valid-feedback">Site is valid!</div>
+                                            <div class="invalid-feedback">Site cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="support_project_id">Project Name</label>
+                                            <select id="support_project_id" name="site_project_id" required="1" value=""
+                                                    class="form-control">
+                                                <option value="">---Select Project---</option>
+                                                <t t-foreach="site_project_ids or []" t-as="project_data">
+                                                    <option t-att-class="'' if default_site_project_id and project_data['id'] == default_site_project_id else 'd-none'"
+                                                            t-att-selected="project_data['id'] == default_site_project_id if default_site_project_id else 0"
+                                                            t-att-site_id="project_data['site_id']"
+                                                            t-att-value="project_data['id']">
+                                                        <t t-esc="project_data['name']"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                            <div class="valid-feedback">Project is valid!</div>
+                                            <div class="invalid-feedback">Project cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="partner_phone">Phone</label>
+                                            <input type="text" required="1" name="partner_phone" id="partner_phone"
+                                                   value=""
+                                                   class="form-control" placeholder="Enter Phone Number"/>
+                                            <div class="valid-feedback">Phone is valid!</div>
+                                            <div class="invalid-feedback">Phone cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="partner_email">Email</label>
+                                            <input id="partner_email" type="email" required="1"
+                                                   t-att-value="default_partner_email"
+                                                   class="form-control"
+                                                   name="partner_email" placeholder="Enter email"/>
+                                            <div class="valid-feedback">Email is valid!</div>
+                                            <div class="invalid-feedback">Email is invalid!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center mt16">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="oe_structure oe_empty" id="support_ticket_2 "/>
+            </t>
+        </template>
+
+        <record id="support_ticket_submitted" model="website.page">
+            <field name="url">/support-ticket-submitted</field>
+            <field name="website_indexed" eval="False"/>
+            <field name="website_published">True</field>
+            <field name="name">Support Ticket Submitted</field>
+            <field name="type">qweb</field>
+            <field name="key">p_website_helpdesk_extend.support_ticket_submitted</field>
+            <field name="arch" type="xml">
+                <t name="Support Ticket Submitted" t-name="p_website_helpdesk_extend.support_ticket_submitted">
+                    <t t-call="website.layout">
+                        <div id="wrap" class="oe_structure oe_empty h-100">
+                            <div class="container d-flex flex-column justify-content-center h-100">
+                                <div class="row justify-content-center">
+                                    <h1 class="text-center">
+                                        <i class="fa fa-check-circle fa-1x text-success mr-2" role="img"
+                                           aria-label="Success" title="Success"/>
+                                        <t t-if="ticket">
+                                            <span>Your Ticket Number is
+                                                <a t-if="request.session.uid"
+                                                   t-attf-href="/helpdesk/ticket/#{ticket.id}">#
+                                                    <span t-field="ticket.id"/>
+                                                </a>
+                                                <t t-if="not request.session.get('uid')">#
+                                                    <span t-field="ticket.id"/>
+                                                </t>
+                                                .
+                                            </span>
+                                        </t>
+                                    </h1>
+                                    <h1 class="text-center">Thank you for submitting your issue, our team will get right
+                                        on it!
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+    </data>
+</odoo>

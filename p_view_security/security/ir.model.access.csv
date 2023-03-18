@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access.security.role.user,access_security_role_user,model_security_role,base.group_no_one,1,1,1,1
 access.security.view.fields.user,access_security_view_fields_user,model_security_view_fields,base.group_no_one,1,1,1,1
+access.security.role.portal,access_security_role_portal,model_security_role,base.group_portal,1,0,0,0
+access.security.view.fields.portal,access_security_view_fields_portal,model_security_view_fields,base.group_portal,1,0,0,0

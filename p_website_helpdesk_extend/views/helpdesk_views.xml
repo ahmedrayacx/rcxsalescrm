@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="new_view_helpdesk_form" model="ir.ui.view">
+            <field name="name">res.helpdesk.ticket.inherit.form.custom</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="sub_team_id" domain="[('team_id', '=', team_id)]" context="{'default_team_id': team_id}" attrs="{'invisible': [('is_helpdesk', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='ticket_type_id']" position="after">
+                    <field name="partner_ids" invisible="1"/>
+                    <field name="is_helpdesk" invisible="1"/>
+                    <field name="is_incident" attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="hrid"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="site_id" domain="[('parent_id','=',False)]"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="site_project_id"
+                           context="{'show_short_name': True, 'default_parent_id': site_id}"
+                           attrs="{'required': [('site_id','!=',False)], 'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"
+                           domain="[('parent_id','=',site_id)]"/>
+                    <field name="type_id" domain="[('parent_id','=',False), ('team_id','=',team_id)]"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="sub_type_1"
+                           context="{'show_short_name': True, 'default_parent_id': type_id}"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"
+                           domain="[('parent_id','=',type_id)]"/>
+                    <field name="sub_type_2"
+                           context="{'show_short_name': True, 'default_parent_id': sub_type_1}"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"
+                           domain="[('parent_id','=',sub_type_1)]"/>
+                    <field name="sub_type_3"
+                           context="{'show_short_name': True, 'default_parent_id': sub_type_2}"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"
+                           domain="[('parent_id','=',sub_type_2)]"/>
+                    <field name="sub_type_4"
+                           context="{'show_short_name': True, 'default_parent_id': sub_type_3}"
+                           attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"
+                           domain="[('parent_id','=',sub_type_3)]"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', partner_ids)]</attribute>
+                    <attribute name="context">{'default_name': partner_name, 'default_email': partner_email,
+                        'default_phone': partner_phone, 'default_is_helpdesk': context.get('show_only_helpdesk')}
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='ticket_type_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_site_extra_data_search" model="ir.ui.view">
+            <field name="name">support.extra.site.search.view</field>
+            <field name="model">support.extra.site</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                    <separator/>
+                    <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_parent_id" string="Parent" context="{'group_by': 'parent_id'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="parent_id" context="{'show_short_name': True}" string="Parent"
+                               enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_site_extra_data_tree" model="ir.ui.view">
+            <field name="name">support.extra.site.tree.view</field>
+            <field name="model">support.extra.site</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="complete_name" string="Full Name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_site_extra_data_form" model="ir.ui.view">
+            <field name="name">support.extra.site.form.view</field>
+            <field name="model">support.extra.site</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="action_open_childs_names"
+                                    icon="fa-exchange">
+                                <field string="Childs" name="len_child_ids" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                            <group>
+                                <field name="parent_id"/>
+                                <field name="company_id"/>
+                            </group>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_site_extra_data" model="ir.actions.act_window">
+            <field name="name">Extra Site Items</field>
+            <field name="res_model">support.extra.site</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_site_extra_data" name="Extra Site Items" id="menu_extra_site_items"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="40"/>
+
+        <record id="view_type_extra_data_search" model="ir.ui.view">
+            <field name="name">support.extra.type.search.view</field>
+            <field name="model">support.extra.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                    <separator/>
+                    <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_parent_id" string="Parent" context="{'group_by': 'parent_id'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="parent_id" context="{'show_short_name': True}" string="Parent"
+                               enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_type_extra_data_tree" model="ir.ui.view">
+            <field name="name">support.extra.type.tree.view</field>
+            <field name="model">support.extra.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="complete_name" string="Full Name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_type_extra_data_form" model="ir.ui.view">
+            <field name="name">support.extra.type.form.view</field>
+            <field name="model">support.extra.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="action_open_childs_names"
+                                    icon="fa-exchange">
+                                <field string="Childs" name="len_child_ids" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                            <group>
+                                <field name="parent_id"/>
+                                <field name="team_id"
+                                       attrs="{'invisible': [('parent_id', '!=',False)], 'required': [('parent_id', '=',False)]}"/>
+                                <field name="company_id"/>
+                            </group>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_type_extra_data" model="ir.actions.act_window">
+            <field name="name">Extra Type Items</field>
+            <field name="res_model">support.extra.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_type_extra_data" name="Extra Type Items" id="menu_extra_type_items"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="41"/>
+
+        <record id="view_child_team_search" model="ir.ui.view">
+            <field name="name">helpdesk.team.child.search.view</field>
+            <field name="model">helpdesk.team.child</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="team_id"/>
+                    <separator/>
+                    <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_team_id" string="Team" context="{'group_by': 'team_id'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="team_id" string="Team"
+                               enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_child_team_tree" model="ir.ui.view">
+            <field name="name">helpdesk.team.child.tree.view</field>
+            <field name="model">helpdesk.team.child</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="team_id" domain="[('id', 'in', available_team_ids)]" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="company_id"/>
+                    <field name="available_team_ids" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_child_team_form" model="ir.ui.view">
+            <field name="name">helpdesk.team.child.form.view</field>
+            <field name="model">helpdesk.team.child</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" placeholder="Sub-Team Name"/>
+                            </h1>
+                            <group>
+                                <field name="team_id" domain="[('id', 'in', available_team_ids)]" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                                <field name="company_id"/>
+                                <field name="available_team_ids" invisible="1"/>
+                            </group>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_helpdesk_child_team_data" model="ir.actions.act_window">
+            <field name="name">Helpdesk Sub-Team</field>
+            <field name="res_model">helpdesk.team.child</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{'show_only_helpdesk': True}</field>
+            <field name="domain">[('team_id.is_helpdesk', '=', True)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_support_child_team_data" model="ir.actions.act_window">
+            <field name="name">Helpdesk Sub-Team</field>
+            <field name="res_model">helpdesk.team.child</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('team_id.is_helpdesk', '=', False)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_helpdesk_child_team_data" name="Sub-Team" id="menu_helpdesk_child_team"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="42"/>
+
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.view.inherit.form.custom</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="is_helpdesk"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="helpdesk_team_view_form" model="ir.ui.view">
+            <field name="name">helpdesk.team.inherit.form.custom</field>
+            <field name="model">helpdesk.team</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='productivity']" position="inside">
+                    <div class="col-lg-6 o_setting_box" attrs="{'invisible': [('is_helpdesk', '=',False)]}">
+                        <div class="o_setting_right_pane">
+                            <label for="portal_color_code" string="Portal Color Code"/>
+                            <div class="text-muted">
+                                Select Box color to show in Frontend
+                            </div>
+                            <field name="is_helpdesk" invisible="1"/>
+                            <field name="portal_color_code" widget="color" class="mt16"
+                                   placeholder="Select Color..."/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

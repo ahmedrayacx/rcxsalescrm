@@ -1,0 +1,38 @@
+.support-ticket {
+    .card {
+        height:100% !important;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+    label.radio-label {
+        height: 50%;
+        display: block;
+        color: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem;
+        text-align: center;
+        position: relative;
+    }
+    input[type="radio"]:checked + label.radio-label {
+        box-shadow: 0px 0px 5px var(--o-color-1);
+        &::after {
+            color: hsla(215, 5%, 25%, 1);
+            font-family: FontAwesome;
+            border: 2px solid var(--o-color-1);
+            content: "\f00c";
+            font-size: 16px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-25%);
+            height: 25px;
+            width: 25px;
+            text-align: center;
+            border-radius: 50%;
+            background: white;
+        }
+    }
+}

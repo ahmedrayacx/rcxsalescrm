@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_support_extra_site_user,access.support.extra.site.user,model_support_extra_site,base.group_user,1,1,1,1
+access_support_extra_type_user,access.support.extra.type.user,model_support_extra_type,base.group_user,1,1,1,1
+access_support_extra_site_portal,access.support.extra.site.portal,model_support_extra_site,base.group_portal,1,0,0,0
+access_support_extra_type_portal,access.support.extra.type.portal,model_support_extra_type,base.group_portal,1,0,0,0
+access_helpdesk_team_child_portal,access.helpdesk.team.child.portal,model_helpdesk_team_child,base.group_portal,1,0,0,0
+access_helpdesk_team_child_user,access.helpdesk.team.child.user,model_helpdesk_team_child,base.group_user,1,1,1,1
