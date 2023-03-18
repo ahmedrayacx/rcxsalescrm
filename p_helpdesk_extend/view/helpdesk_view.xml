@@ -37,6 +37,7 @@
                     <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="is_helpdesk"/>
                 </xpath>
                 <xpath expr="//field[@name='team_id']" position="attributes">
                     <attribute name="domain">[('id', 'in', team_ids)]</attribute>
