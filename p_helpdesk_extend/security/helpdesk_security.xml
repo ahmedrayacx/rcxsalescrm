@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_support_ticket" model="res.groups">
+            <field name="name">Show Support Menu</field>
+        </record>
+    </data>
+</odoo>
