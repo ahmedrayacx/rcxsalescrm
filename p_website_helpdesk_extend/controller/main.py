@@ -51,7 +51,7 @@ class WebsiteHelpdeskExtend(http.Controller):
                     attach_list.append(attach_id.id)
                 if attach_list:
                     helpdesk_id.write({
-                        'attachment_ids': [(6, 0, attach_list)]
+                        'ticket_attachment_ids': [(6, 0, attach_list)]
                     })
                 return request.render("p_website_helpdesk_extend.support_ticket_submitted", {'ticket': helpdesk_id})
             except Exception as e:

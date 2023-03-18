@@ -218,7 +218,7 @@ class Helpdesk_ticket(models.Model):
     sub_type_4 = fields.Many2one(
         'support.extra.type'
     )
-    attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
+    ticket_attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
     is_incident = fields.Boolean("Is Incident?")
 
     partner_ids = fields.Many2many('res.partner', compute="compute_customers")
