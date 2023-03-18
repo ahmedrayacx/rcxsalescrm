@@ -64,7 +64,7 @@ class OAuth_Controller(http.Controller):
                 })
             request.cr.commit()
             return login_and_redirect(*credentials,
-                                      redirect_url=root_url + 'web?')
+                                      redirect_url=root_url + 'support/ticket')
         except odoo.exceptions.AccessDenied:
             _logger.info(
                 'OAuth2: access denied,'

@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='client_id']" position="after">
                 <field name="secret_key"/>
+                <field name="signin_type" attrs="{'invisible': [('secret_key', '=', False)], 'required': [('secret_key', '!=', False)]}"/>
             </xpath>
         </field>
     </record>
