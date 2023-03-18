@@ -8,11 +8,11 @@
             <field name="mode">extension</field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="is_helpdesk" invisible="1"/>
                     <field name="sub_team_id" domain="[('team_id', '=', team_id)]" context="{'default_team_id': team_id}" attrs="{'invisible': [('is_helpdesk', '=', False)]}"/>
                 </xpath>
                 <xpath expr="//field[@name='ticket_type_id']" position="after">
                     <field name="partner_ids" invisible="1"/>
-                    <field name="is_helpdesk" invisible="1"/>
                     <field name="is_incident" attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"/>
                     <field name="hrid"
                            attrs="{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', False)]}"/>
