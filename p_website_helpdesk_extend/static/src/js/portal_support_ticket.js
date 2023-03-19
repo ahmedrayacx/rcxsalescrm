@@ -19,7 +19,7 @@ odoo.define('p_website_helpdesk_extend.support_ticket', function (require) {
             $("form.support-ticket #support_type_id option").addClass('d-none')
             $("form.support-ticket #support_type_id option[team='"+$(ev.currentTarget).val()+"']").removeClass('d-none')
         });
-        $("form.support-ticket select[name='support_type_id']").on("change", function(ev){
+        $("form.support-ticket select[name='type_id']").on("change", function(ev){
             $("form.support-ticket #support_type_id_1").val('')
             $("form.support-ticket #support_type_id_1 option").addClass('d-none')
             $("form.support-ticket #support_type_id_1 option[type='"+$(ev.currentTarget).val()+"']").removeClass('d-none')
