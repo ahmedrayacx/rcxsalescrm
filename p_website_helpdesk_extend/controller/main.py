@@ -105,10 +105,20 @@ class WebsiteHelpdeskExtend(http.Controller):
             'type_ids': request.env['support.extra.type'].sudo().search(
                 [('parent_id', '=', False), ('team_id', '!=', False)]),
             'team_ids': request.env['helpdesk.team'].sudo().search_read([('is_helpdesk', '=', True)], ['id', 'name', 'portal_color_code']),
-            'form_action': '/support/ticket'
+            'form_action': '/support/ticket',
+            'sub_type_1_ids': request.env['support.extra.type'].sudo().search(
+                [('parent_id.parent_id', '=', False)]),
         }
+        new_sub_type = []
+        for sub_type in vals.get('sub_type_1_ids'):
+            new_sub_type.append({
+                'id': sub_type.id,
+                'name': sub_type.name,
+                'type': sub_type.parent_id.id or ''
+            })
+        vals['sub_type_1_ids'] = new_sub_type
         new_type = []
-        for type in vals['type_ids']:
+        for type in vals.get('type_ids'):
             new_type.append({
                 'id': type.id,
                 'name': type.name,

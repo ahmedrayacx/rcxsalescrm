@@ -34,10 +34,10 @@
                     <field name="existingclient" widget="boolean_toggle"
                            attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
                     <field name="team_ids" invisible="1"/>
-                    <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    <field name="is_helpdesk"/>
+                    <field name="market_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
+                    <field name="type_of_service_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
+                    <field name="deliverysite_ids" widget="many2many_tags" options="{'color_field': 'color'}" attrs="{'invisible': ['|', ('team_id', '=', False),('is_helpdesk', '=', True)]}"/>
+                    <field name="is_helpdesk" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='team_id']" position="attributes">
                     <attribute name="domain">[('id', 'in', team_ids)]</attribute>

@@ -47,6 +47,21 @@
                                             <div class="invalid-feedback">Type cannot be blank!</div>
                                         </div>
                                         <div class="form-group">
+                                            <label for="support_type_id_1">Sub Type</label>
+                                            <select id="support_type_id_1" name="sub_type_1" required="1" value=""
+                                                    class="form-control">
+                                                <option value="" type="" selected="">---Select Sub Type---</option>
+                                                <t t-foreach="sub_type_1_ids or []" t-as="sub_type_data">
+                                                    <option class="d-none" t-att-type="sub_type_data['type']"
+                                                            t-att-value="sub_type_data['id']">
+                                                        <t t-esc="sub_type_data['name']"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                            <div class="valid-feedback">Sub Type is valid!</div>
+                                            <div class="invalid-feedback">Sub Type cannot be blank!</div>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="name">Subject</label>
                                             <input type="text" id="name" name="name" placeholder="Enter Subject"
                                                    value=""
