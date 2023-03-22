@@ -66,7 +66,7 @@
                 <xpath expr="//field[@name='ticket_type_id']" position="attributes">
                     <attribute name="attrs">{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', True)]}</attribute>
                 </xpath>
-                <xpath expr="//field[@name='email_cc']" position="before">
+                <xpath expr="//field[@name='email_cc']" position="after">
                     <field name="show_due_date" invisible="1"/>
                     <field name="due_date" attrs="{'invisible': [('show_due_date', '=', False)]}"/>
                 </xpath>
