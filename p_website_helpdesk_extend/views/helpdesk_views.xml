@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
+        <record id="helpdesk_tickets_view_tree" model="ir.ui.view">
+            <field name="name">res.helpdesk.ticket.inherit.tree.custom</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="is_helpdesk" invisible="1"/>
+                    <field name="sub_team_id" attrs="{'column_invisible': [('is_helpdesk', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="new_view_helpdesk_form" model="ir.ui.view">
             <field name="name">res.helpdesk.ticket.inherit.form.custom</field>
             <field name="model">helpdesk.ticket</field>
@@ -10,6 +23,9 @@
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field name="is_helpdesk" invisible="1"/>
                     <field name="sub_team_id" domain="[('team_id', '=', team_id)]" context="{'default_team_id': team_id}" attrs="{'invisible': [('is_helpdesk', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_helpdesk', '=', True), ('id', '!=', False)]}</attribute>
                 </xpath>
                 <xpath expr="//field[@name='ticket_type_id']" position="after">
                     <field name="partner_ids" invisible="1"/>
@@ -49,6 +65,10 @@
                 </xpath>
                 <xpath expr="//field[@name='ticket_type_id']" position="attributes">
                     <attribute name="attrs">{'invisible': ['|', ('team_id', '=', False), ('is_helpdesk', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_phone']" position="before">
+                    <field name="show_due_date" invisible="1"/>
+                    <field name="due_date" attrs="{'invisible': [('show_due_date', '=', False)]}"/>
                 </xpath>
             </field>
         </record>

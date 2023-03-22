@@ -194,7 +194,7 @@ class SupportSubTeamField(models.Model):
 class Helpdesk_ticket(models.Model):
     _inherit = 'helpdesk.ticket'
 
-    is_helpdesk = fields.Boolean(related="team_id.is_helpdesk")
+    is_helpdesk = fields.Boolean(related="team_id.is_helpdesk", store=True)
     sub_team_id = fields.Many2one('helpdesk.team.child', string="Sub-Team")
     hrid = fields.Char("HRID")
     site_id = fields.Many2one(
@@ -220,8 +220,18 @@ class Helpdesk_ticket(models.Model):
     )
     ticket_attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
     is_incident = fields.Boolean("Is Incident?")
+    due_date = fields.Date("Due Date")
+    show_due_date = fields.Boolean("Show Due Date", compute="compute_due_date")
 
     partner_ids = fields.Many2many('res.partner', compute="compute_customers")
+
+    @api.depends('is_helpdesk', 'team_id', 'type_id')
+    def compute_due_date(self):
+        for rec in self:
+            show_due_date = False
+            if rec.is_helpdesk and rec.team_id and rec.team_id.name.upper() == 'IT' and rec.type_id and rec.type_id.name.upper() == 'CHANGE':
+                show_due_date = True
+            rec.show_due_date = show_due_date
 
     @api.depends('partner_id')
     def compute_customers(self):
