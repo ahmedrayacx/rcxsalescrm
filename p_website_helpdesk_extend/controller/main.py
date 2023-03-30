@@ -21,7 +21,7 @@ class WebsiteHelpdeskExtend(http.Controller):
             helpdesk_sudo = request.env['helpdesk.ticket'].sudo()
             default_vals = helpdesk_sudo.default_get(helpdesk_sudo._fields)
             try:
-                Many_2one_list = ['site_id', 'site_project_id', 'type_id', 'team_id']
+                Many_2one_list = ['site_id', 'site_project_id', 'type_id', 'team_id', 'sub_type_1']
                 for m2o_name in Many_2one_list:
                     kwargs[m2o_name] = kwargs.get(m2o_name) and int(kwargs.get(m2o_name)) or False
                 default_vals.update(kwargs)
