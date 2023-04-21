@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
+from odoo.osv import expression
 
 
 class SupportSiteFields(models.Model):
@@ -332,6 +333,23 @@ class Helpdesk_ticket(models.Model):
                 'sub_type_4': False,
             })
 
+    @api.model
+    def _sla_reset_trigger(self):
+        field_list = super()._sla_reset_trigger()
+        field_list.append('new_type_id')
+        field_list.append('sub_type_1')
+        return field_list
+
+    def _sla_find_extra_domain(self):
+        domain = super()._sla_find_extra_domain()
+        domain = expression.OR([domain, [
+            '|', ('new_type_id', 'in', self.type_id.ids), ('new_type_id', '=', False),
+        ]])
+        domain = expression.OR([domain, [
+            '|', ('sub_type_1', 'in', self.sub_type_1.ids), ('sub_type_1', '=', False),
+        ]])
+        return domain
+
 
 class Helpdesk_Team(models.Model):
     _inherit = 'helpdesk.team'
@@ -353,3 +371,17 @@ class ResPartner_Inherit(models.Model):
     _inherit = 'res.partner'
 
     is_helpdesk = fields.Boolean("Is Helpdesk Customer")
+
+
+class HelpdeskSLA(models.Model):
+    _inherit = 'helpdesk.sla'
+
+    new_type_id = fields.Many2one(
+        'support.extra.type',
+        string="Type",
+        help="Only apply the SLA to a specific ticket type. If left empty it will apply to all types."
+    )
+    sub_type_1 = fields.Many2one(
+        'support.extra.type',
+        help="Only apply the SLA to a specific Sub Type 1. If left empty it will apply to all Sub Type 1."
+    )

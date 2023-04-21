@@ -176,6 +176,21 @@
             <field name="act_window_id" ref="new_helpdesk_ticket_analysis_action"/>
         </record>
 
+        <record id="new_helpdesk_sla_action_main" model="ir.actions.act_window">
+            <field name="name">SLA Policies</field>
+            <field name="res_model">helpdesk.sla</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">['&amp;','|', ('team_id.security_role_ids', '=', False), ('team_id.security_role_ids.group_id.users', 'in', uid), ('team_id.is_helpdesk','=', True)]</field>
+            <field name="context">{'show_only_helpdesk': True}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                    No SLA policies found. Let's create one!
+                </p><p>
+                    Make sure tickets are handled on time by using SLA Policies.<br/>
+                </p>
+            </field>
+        </record>
+
         <menuitem id="new_menu_helpdesk_root" name="Helpdesk"
                   sequence="90"
                   web_icon="helpdesk,static/description/icon.png"
@@ -205,7 +220,7 @@
                   sequence="3" parent="p_website_helpdesk_extend.new_helpdesk_menu_config"
                   groups="p_website_helpdesk_extend.group_helpdesk_ticket"/>
 
-        <menuitem id="new_helpdesk_sla_menu_main" action="helpdesk.helpdesk_sla_action_main"
+        <menuitem id="new_helpdesk_sla_menu_main" action="new_helpdesk_sla_action_main"
                   sequence="4" parent="p_website_helpdesk_extend.new_helpdesk_menu_config"
                   groups="p_website_helpdesk_extend.group_helpdesk_ticket,helpdesk.group_use_sla"/>
         <menuitem id="new_helpdesk_menu_config_activity_type"
