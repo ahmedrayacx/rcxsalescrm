@@ -321,8 +321,8 @@
                     <attribute name="context">{'default_is_helpdesk': context.get('show_only_helpdesk', False)}</attribute>
                 </xpath>
                 <field name='ticket_type_id' position="after">
-                    <field name="new_type_id" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
-                    <field name="sub_type_1" domain="[('parent_id','=', new_type_id), ('parent_id','!=', False)]" context="{'show_short_name': True, 'default_parent_id': new_type_id}" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
+                    <field name="type_id" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
+                    <field name="sub_type_1" domain="[('parent_id','=', type_id), ('parent_id','!=', False)]" context="{'show_short_name': True, 'default_parent_id': type_id}" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
                 </field>
                 <field name='ticket_type_id' position="attributes">
                     <attribute name="invisible">context.get('show_only_helpdesk', False)</attribute>
