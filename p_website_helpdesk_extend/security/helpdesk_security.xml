@@ -4,5 +4,9 @@
         <record id="group_helpdesk_ticket" model="res.groups">
             <field name="name">Show Helpdesk Menu</field>
         </record>
+
+        <record id="crm.crm_rule_personal_lead" model="ir.rule">
+            <field name="domain_force">['|', '|',('user_id','=',user.id),('user_id','=',False), ('user_id.employee_parent_id','=',user.employee_id.id)]</field>
+        </record>
     </data>
 </odoo>
