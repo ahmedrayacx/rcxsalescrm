@@ -70,6 +70,21 @@
                     <field name="show_due_date" invisible="1"/>
                     <field name="due_date" attrs="{'invisible': [('show_due_date', '=', False)]}"/>
                 </xpath>
+                <xpath expr="//field[@name='priority']" position="after">
+                    <field name="is_type_movement" invisible="1"/>
+                    <field name="movement_type_floor"
+                           attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="movement_type_of_assets"
+                           attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="movement_qty"
+                           attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="movement_from"
+                           attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="movement_to"
+                           attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
+                    <field name="movement_reason"
+                           attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
+                </xpath>
             </field>
         </record>
 
@@ -328,6 +343,88 @@
                     <attribute name="invisible">context.get('show_only_helpdesk', False)</attribute>
                 </field>
             </field>
+        </record>
+
+        <record id="view_helpdesk_type_floor_search" model="ir.ui.view">
+            <field name="name">helpdesk.type.floor.search.view</field>
+            <field name="model">helpdesk.type.floor</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_helpdesk_type_floor_tree" model="ir.ui.view">
+            <field name="name">helpdesk.type.floor.tree.view</field>
+            <field name="model">helpdesk.type.floor</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_helpdesk_type_floor_form" model="ir.ui.view">
+            <field name="name">helpdesk.type.floor.form.view</field>
+            <field name="model">helpdesk.type.floor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_helpdesk_type_floor" model="ir.actions.act_window">
+            <field name="name">Type(Movement) Floor</field>
+            <field name="res_model">helpdesk.type.floor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_helpdesk_type_assets_search" model="ir.ui.view">
+            <field name="name">helpdesk.type.floor.search.view</field>
+            <field name="model">helpdesk.type.floor</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_helpdesk_type_assets_tree" model="ir.ui.view">
+            <field name="name">helpdesk.type.floor.tree.view</field>
+            <field name="model">helpdesk.type.floor</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_helpdesk_type_assets_form" model="ir.ui.view">
+            <field name="name">helpdesk.type.floor.form.view</field>
+            <field name="model">helpdesk.type.floor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_helpdesk_type_assets" model="ir.actions.act_window">
+            <field name="name">Type(Movement) Assets</field>
+            <field name="res_model">helpdesk.type.floor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
     </data>

@@ -3,6 +3,22 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 
 
+class Helpdesk_Floor(models.Model):
+    _name = 'helpdesk.type.floor'
+    _description = 'Helpdesk Movement Type Floor'
+
+    name = fields.Char("Name")
+    active = fields.Boolean("Active")
+
+
+class Helpdesk_Assets(models.Model):
+    _name = 'helpdesk.type.assets'
+    _description = 'Helpdesk Movement Tpe Assets'
+
+    name = fields.Char("Name")
+    active = fields.Boolean("Active")
+
+
 class SupportSiteFields(models.Model):
     _name = 'support.extra.site'
     _description = 'Support Site Selection'
@@ -192,6 +208,7 @@ class SupportSubTeamField(models.Model):
             domain.append(('is_helpdesk', '=', is_helpdesk))
             rec.available_team_ids = self.env['helpdesk.team'].search(domain)
 
+
 class Helpdesk_ticket(models.Model):
     _inherit = 'helpdesk.ticket'
 
@@ -225,6 +242,21 @@ class Helpdesk_ticket(models.Model):
     show_due_date = fields.Boolean("Show Due Date", compute="compute_due_date")
 
     partner_ids = fields.Many2many('res.partner', compute="compute_customers")
+
+    is_type_movement = fields.Boolean("Is Type Movement", compute="compute_movement_type")
+    movement_type_floor = fields.Many2one('helpdesk.type.floor', string="Floor")
+    movement_type_of_assets = fields.Many2one('helpdesk.type.floor', string="Type of Assets")
+    movement_qty = fields.Integer("Quantity")
+    movement_from = fields.Date("From Date")
+    movement_to = fields.Date("From To")
+    movement_reason = fields.Text("Reason")
+
+    @api.depends('type_id')
+    def compute_movement_type(self):
+        for rec in self:
+            rec.is_type_movement = False
+            if rec.type_id and rec.type_id.name.lower() == 'movement':
+                rec.is_type_movement = True
 
     @api.depends('is_helpdesk', 'team_id', 'type_id')
     def compute_due_date(self):

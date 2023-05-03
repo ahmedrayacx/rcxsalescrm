@@ -273,6 +273,12 @@
         <menuitem action="action_helpdesk_child_team_data" name="Sub-Team" id="menu_helpdesk_child_team"
                   parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="42"/>
 
+        <menuitem action="action_view_helpdesk_type_floor" id="menu_view_helpdesk_type_floor"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="43"/>
+
+        <menuitem action="action_view_helpdesk_type_assets" id="menu_view_helpdesk_type_assets"
+                  parent="p_website_helpdesk_extend.new_helpdesk_menu_config" sequence="44"/>
+
 
     </data>
 </odoo>
