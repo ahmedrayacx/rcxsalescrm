@@ -8,7 +8,6 @@ class Helpdesk_Floor(models.Model):
     _description = 'Helpdesk Movement Type Floor'
 
     name = fields.Char("Name")
-    active = fields.Boolean("Active")
 
 
 class Helpdesk_Assets(models.Model):
@@ -16,7 +15,6 @@ class Helpdesk_Assets(models.Model):
     _description = 'Helpdesk Movement Tpe Assets'
 
     name = fields.Char("Name")
-    active = fields.Boolean("Active")
 
 
 class SupportSiteFields(models.Model):

@@ -69,8 +69,6 @@
                 <xpath expr="//field[@name='email_cc']" position="after">
                     <field name="show_due_date" invisible="1"/>
                     <field name="due_date" attrs="{'invisible': [('show_due_date', '=', False)]}"/>
-                </xpath>
-                <xpath expr="//field[@name='priority']" position="after">
                     <field name="is_type_movement" invisible="1"/>
                     <field name="movement_type_floor"
                            attrs="{'invisible': ['|', ('is_type_movement', '=', False), ('is_helpdesk', '=', False)]}"/>
@@ -387,8 +385,8 @@
         </record>
 
         <record id="view_helpdesk_type_assets_search" model="ir.ui.view">
-            <field name="name">helpdesk.type.floor.search.view</field>
-            <field name="model">helpdesk.type.floor</field>
+            <field name="name">helpdesk.type.assets.search.view</field>
+            <field name="model">helpdesk.type.assets</field>
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
@@ -397,8 +395,8 @@
         </record>
 
         <record id="view_helpdesk_type_assets_tree" model="ir.ui.view">
-            <field name="name">helpdesk.type.floor.tree.view</field>
-            <field name="model">helpdesk.type.floor</field>
+            <field name="name">helpdesk.type.assets.tree.view</field>
+            <field name="model">helpdesk.type.assets</field>
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name" required="1"/>
@@ -407,8 +405,8 @@
         </record>
 
         <record id="view_helpdesk_type_assets_form" model="ir.ui.view">
-            <field name="name">helpdesk.type.floor.form.view</field>
-            <field name="model">helpdesk.type.floor</field>
+            <field name="name">helpdesk.type.assets.form.view</field>
+            <field name="model">helpdesk.type.assets</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -422,7 +420,7 @@
 
         <record id="action_view_helpdesk_type_assets" model="ir.actions.act_window">
             <field name="name">Type(Movement) Assets</field>
-            <field name="res_model">helpdesk.type.floor</field>
+            <field name="res_model">helpdesk.type.assets</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
         </record>
