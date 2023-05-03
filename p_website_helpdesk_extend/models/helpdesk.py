@@ -245,7 +245,7 @@ class Helpdesk_ticket(models.Model):
 
     is_type_movement = fields.Boolean("Is Type Movement", compute="compute_movement_type")
     movement_type_floor = fields.Many2one('helpdesk.type.floor', string="Floor")
-    movement_type_of_assets = fields.Many2one('helpdesk.type.floor', string="Type of Assets")
+    movement_type_of_assets = fields.Many2one('helpdesk.type.assets', string="Type of Assets")
     movement_qty = fields.Integer("Quantity")
     movement_from = fields.Date("From Date")
     movement_to = fields.Date("From To")
