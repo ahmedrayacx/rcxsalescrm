@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="email_template_helpdesk_ticket" model="mail.template">
+            <field name="name">Helpdesk Ticket Record Has Been modified - Send by Email</field>
+            <field name="subject">Helpdesk Ticket ({{ object.display_name }})</field>
+            <field name="email_from">{{object.company_id.email}}</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <br/>
+                    <t t-out="ctx.get('email_to')"/>
+                    <t t-foreach="ctx.get('message')" t-as="line">
+                        <t t-out="line"/>
+                        <br/>
+                    </t>
+                    <br/>
+                    Thank you
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
