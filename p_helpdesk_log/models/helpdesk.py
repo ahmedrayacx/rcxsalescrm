@@ -5,11 +5,15 @@ class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
 
     def write(self, vals):
+        fields_list = []
+        fields_data = {}
+        old_val = []
         if self.is_helpdesk or vals.get('is_helpdesk') == True:
             fields_data = self.fields_get()
             fields_list = list(vals.keys())
             old_val = self.read(fields_list)
-            call_super = super(HelpdeskTicket, self).write(vals)
+        call_super = super(HelpdeskTicket, self).write(vals)
+        if self.is_helpdesk or vals.get('is_helpdesk') == True:
             new_val = self.read(fields_list)
             msg_lst = []
             for val in vals:
@@ -32,7 +36,7 @@ class HelpdeskTicket(models.Model):
                     'message': msg_lst
                 }
                 self.send_ticket_mail(email_values_new)
-            return call_super
+        return call_super
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
