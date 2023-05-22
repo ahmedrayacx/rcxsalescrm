@@ -49,12 +49,14 @@ class HelpdeskTicket(models.Model):
 
     def send_ticket_mail(self, ticket_context={}):
         email_to = []
-        user_partner_id = self.env.user.partner_id
-        if user_partner_id != self.partner_id and (self.partner_email or self.partner_id.email):
-            email_to += [self.partner_email or self.partner_id.email]
+        # user_partner_id = self.env.user.partner_id
+        create_user_partner_id = self.sudo().create_uid.sudo().partner_id.sudo()
+        assigned_user_partner_id = self.sudo().user_id.sudo().partner_id.sudo()
+        if create_user_partner_id.email:
+            email_to += [create_user_partner_id.email]
 
-        if user_partner_id != self.user_id.partner_id and self.user_id.partner_id.email:
-            email_to += [self.user_id.email]
+        if assigned_user_partner_id.email:
+            email_to += [assigned_user_partner_id.email]
 
         email_values = {
             'email_to': ','.join(email_to)
