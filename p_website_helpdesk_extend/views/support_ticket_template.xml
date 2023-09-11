@@ -98,7 +98,7 @@
                                             <input type="text" id="hrid" name="hrid" placeholder="Enter HRID"
                                                    t-att-value="default_hrid"
                                                    class="form-control"
-                                                   required="1"/>
+                                                   />
                                             <div class="valid-feedback">HRID is valid!</div>
                                             <div class="invalid-feedback">HRID cannot be blank!</div>
                                         </div>
