@@ -75,7 +75,7 @@ class WebsiteHelpdeskExtend(http.Controller):
                     'default_site_project_id': site_project_id.id
                 })
             result.update({
-                'default_hrid': default_user_vals.get('HRId', '')
+                'default_hrid': default_user_vals.get('HRId', 'Emaar')
             })
         result.update({
             'default_partner_email': request.env.user.login
