@@ -18,6 +18,8 @@ class HelpdeskTicket(models.Model):
         if self.is_helpdesk or vals.get('is_helpdesk') == True:
             new_val = self.read(fields_list)
             _logger.info("Helpdesk Write New Values---->%s" % (new_val))
+            _logger.info(fields_data)
+            _logger.info(vals)
             msg_lst = []
             for val in vals:
                 field_string = fields_data[val]['string'] + ' : '
