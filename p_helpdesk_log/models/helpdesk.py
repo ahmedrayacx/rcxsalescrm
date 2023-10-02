@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
@@ -12,14 +13,16 @@ class HelpdeskTicket(models.Model):
             fields_data = self.fields_get()
             fields_list = list(vals.keys())
             old_val = self.read(fields_list)
+        _logger.debug("Helpdesk Write Old Values---->%s" % (old_val))
         call_super = super(HelpdeskTicket, self).write(vals)
         if self.is_helpdesk or vals.get('is_helpdesk') == True:
             new_val = self.read(fields_list)
+            _logger.debug("Helpdesk Write New Values---->%s" % (new_val))
             msg_lst = []
             for val in vals:
                 field_string = fields_data[val]['string'] + ' : '
-                old_value = old_val and old_val[0][val]
-                new_value = new_val and new_val[0][val]
+                old_value = old_val and len(old_val) > 0 and old_val[0][val]
+                new_value = new_val and len(new_val) > 0 and new_val[0][val]
 
                 if fields_data[val]['type'] not in ['one2many', 'many2many']:
                     if fields_data[val]['type'] == 'many2one':
