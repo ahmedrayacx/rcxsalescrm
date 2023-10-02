@@ -13,11 +13,11 @@ class HelpdeskTicket(models.Model):
             fields_data = self.fields_get()
             fields_list = list(vals.keys())
             old_val = self.read(fields_list)
-        _logger.debug("Helpdesk Write Old Values---->%s" % (old_val))
+        _logger.info("Helpdesk Write Old Values---->%s" % (old_val))
         call_super = super(HelpdeskTicket, self).write(vals)
         if self.is_helpdesk or vals.get('is_helpdesk') == True:
             new_val = self.read(fields_list)
-            _logger.debug("Helpdesk Write New Values---->%s" % (new_val))
+            _logger.info("Helpdesk Write New Values---->%s" % (new_val))
             msg_lst = []
             for val in vals:
                 field_string = fields_data[val]['string'] + ' : '
