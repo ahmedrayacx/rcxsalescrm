@@ -1,11 +1,13 @@
 from odoo import http, _, fields
 from odoo.http import request
-import requests, base64
+import requests
+from odoo.service import db, security
+from odoo.addons.web.controllers.main import Session
 
 
 class CustomAPI(http.Controller):
 
-    @http.route('/record/list', type='json', auth="public")
+    @http.route('/record/list', type='json', auth="public", methods=['POST'])
     def CustomRecordList(self, **kw):
         model_name = kw.get('model_name')
         domain = list(kw.get('domain', [])) or []
@@ -62,7 +64,7 @@ class CustomAPI(http.Controller):
             'total_records': order_ids_length
         }
 
-    @http.route('/mobile/helpdesk/default', type='json', auth="user")
+    @http.route('/mobile/helpdesk/default', type='json', auth="user", methods=['GET'])
     def GetDefultHelpdeskValues(self, **kw):
         vals = {
             'site_ids': request.env['support.extra.site'].sudo().search_read([('parent_id', '=', False)],
@@ -131,17 +133,21 @@ class CustomAPI(http.Controller):
         })
         return vals
 
-    @http.route('/mobile/helpdesk/create', type='json', auth="user")
+    @http.route('/mobile/helpdesk/create', type='json', auth="user", methods=['POST'])
     def MobileHelpdeskCreate(self, **kwargs):
-        attachment_list = kwargs.get('attachments')
+        attachment_list = kwargs.get('attachments', [])
         if 'attachments' in kwargs:
             del kwargs['attachments']
-        helpdesk_sudo = request.env['helpdesk.ticket'].sudo()
+        helpdesk_sudo = request.env['helpdesk.ticket']
+        helpdesk_field_list = helpdesk_sudo._fields
         default_vals = helpdesk_sudo.default_get(helpdesk_sudo._fields)
         try:
             Many_2one_list = ['site_id', 'site_project_id', 'type_id', 'team_id']
-            for m2o_name in Many_2one_list:
-                kwargs[m2o_name] = kwargs.get(m2o_name) and int(kwargs.get(m2o_name)) or False
+            for i in helpdesk_field_list:
+                if i in Many_2one_list:
+                    kwargs[i] = kwargs.get(i) and int(kwargs.get(i)) or False
+                elif i in kwargs.keys():
+                    kwargs[i] = kwargs.get(i) and kwargs.get(i) or False
             default_vals.update(kwargs)
             email = default_vals.get('partner_email')
             if email:
@@ -185,7 +191,7 @@ class CustomAPI(http.Controller):
                 'data': []
             }
 
-    @http.route('/mobile/helpdesk/list', type='json', auth="user")
+    @http.route('/mobile/helpdesk/list', type='json', auth="user", methods=['POST'])
     def MobileHelpdeskHelpdeskList(self, **kw):
         domain = ['|', ('team_id.is_helpdesk', '=', True), ('team_id', '=', False)]
         if 'id' in kw:
@@ -216,3 +222,14 @@ class CustomAPI(http.Controller):
             'fetched_records': len(order_ids),
             'total_records': order_ids_length
         }
+
+    @http.route('/mobile/sso/login', type='json', auth="none", methods=['POST'])
+    def MobileSSOLOGIN(self, **kw):
+        email = kw.get('email')
+        if email:
+            user_id = request.env['res.users'].sudo().search([('login', '=', str(email))])
+            if user_id:
+                request.session.uid = user_id.id
+                request.env['res.users'].clear_caches()
+                request.session.session_token = security.compute_session_token(request.session, request.env)
+        return Session.get_session_info(self)
