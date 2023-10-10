@@ -3,7 +3,8 @@ from odoo.http import request
 import requests
 from odoo.service import db, security
 from odoo.addons.web.controllers.main import Session
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class CustomAPI(http.Controller):
 
@@ -66,6 +67,7 @@ class CustomAPI(http.Controller):
 
     @http.route('/mobile/helpdesk/default', type='json', auth="user", methods=['GET'])
     def GetDefultHelpdeskValues(self, **kw):
+        _logger.info("Helpdesk Default %s" % (kw))
         vals = {
             'site_ids': request.env['support.extra.site'].sudo().search_read([('parent_id', '=', False)],
                                                                              ['id', 'name']),
@@ -135,6 +137,7 @@ class CustomAPI(http.Controller):
 
     @http.route('/mobile/helpdesk/create', type='json', auth="user", methods=['POST'])
     def MobileHelpdeskCreate(self, **kwargs):
+        _logger.info("Helpdesk Create %s" % (kwargs))
         attachment_list = kwargs.get('attachments', [])
         if 'attachments' in kwargs:
             del kwargs['attachments']
@@ -193,6 +196,7 @@ class CustomAPI(http.Controller):
 
     @http.route('/mobile/helpdesk/list', type='json', auth="user", methods=['POST'])
     def MobileHelpdeskHelpdeskList(self, **kw):
+        _logger.info("Helpdesk List %s" % (kw))
         domain = ['|', ('team_id.is_helpdesk', '=', True), ('team_id', '=', False)]
         if 'id' in kw:
             domain.append(('id', '=', kw.get('id')))
@@ -225,6 +229,7 @@ class CustomAPI(http.Controller):
 
     @http.route('/mobile/sso/login', type='json', auth="none", methods=['POST'])
     def MobileSSOLOGIN(self, **kw):
+        _logger.info("SSO Login %s" % (kw))
         email = kw.get('email')
         if email:
             user_id = request.env['res.users'].sudo().search([('login', '=', str(email))])
