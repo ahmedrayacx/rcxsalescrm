@@ -95,6 +95,16 @@ class WebsiteHelpdeskExtend(http.Controller):
         return {}
 
     def get_support_ticket_vals(self):
+        role_ids = request.env['security.role'].search([('is_sso_role', '=', True)])
+        team_ids = role_ids.mapped('team_ids').filtered_domain([('is_helpdesk', '=', True)])
+        if team_ids:
+            team_ids = request.env['helpdesk.team'].sudo().search_read([('id', 'in', team_ids.ids)], ['id', 'name', 'portal_color_code'])
+        if not team_ids:
+            team_ids = request.env['helpdesk.team'].sudo().search_read([('is_helpdesk', '=', True)],
+                                                            ['id', 'name', 'portal_color_code'])
+        team_ids_ids = [i.get('id') for i in team_ids]
+        type_ids = request.env['support.extra.type'].sudo().search(
+                [('parent_id', '=', False), ('team_id', 'in', team_ids_ids)])
         vals = {
             'error': {},
             'error_message': [],
@@ -102,12 +112,11 @@ class WebsiteHelpdeskExtend(http.Controller):
                                                                              ['id', 'name']),
             'site_project_ids': request.env['support.extra.site'].sudo().search(
                 [('parent_id.parent_id', '=', False)]),
-            'type_ids': request.env['support.extra.type'].sudo().search(
-                [('parent_id', '=', False), ('team_id', '!=', False)]),
-            'team_ids': request.env['helpdesk.team'].sudo().search_read([('is_helpdesk', '=', True)], ['id', 'name', 'portal_color_code']),
+            'type_ids': type_ids,
+            'team_ids': team_ids,
             'form_action': '/support/ticket',
             'sub_type_1_ids': request.env['support.extra.type'].sudo().search(
-                [('parent_id.parent_id', '=', False)]),
+                [('parent_id', 'in', type_ids.ids)]),
         }
         new_sub_type = []
         for sub_type in vals.get('sub_type_1_ids'):

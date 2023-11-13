@@ -10,6 +10,7 @@ class SecurityRole(models.Model):
     group_id = fields.Many2one('res.groups', copy=False, ondelete='cascade')
     user_ids = fields.Many2many('res.users', string="Users", readonly=False, compute="compute_users",
                                 inverse="inverse_users")
+    is_sso_role = fields.Boolean("Is for SSO Users?")
 
     def compute_users(self):
         for rec in self:

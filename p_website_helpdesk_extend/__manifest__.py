@@ -15,7 +15,9 @@
         'security/helpdesk_security.xml',
         'views/helpdesk_views.xml',
         'views/helpdesk_menu.xml',
-        'views/support_ticket_template.xml'
+        'views/support_ticket_template.xml',
+        'report/helpdesk_ticket_analysis_views.xml',
+        'report/helpdesk_sla_report_analysis_views.xml'
     ],
     'license': 'LGPL-3',
     'assets': {

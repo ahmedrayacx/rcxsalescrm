@@ -366,8 +366,7 @@ class Helpdesk_ticket(models.Model):
     @api.model
     def _sla_reset_trigger(self):
         field_list = super()._sla_reset_trigger()
-        field_list.append('type_id')
-        field_list.append('sub_type_1')
+        field_list.extend(['type_id', 'sub_type_1', 'sub_type_2', 'sub_type_3', 'sub_type_4'])
         return field_list
 
     def _sla_find_extra_domain(self):
@@ -377,6 +376,15 @@ class Helpdesk_ticket(models.Model):
         ]])
         domain = expression.OR([domain, [
             '|', ('sub_type_1', 'in', self.sub_type_1.ids), ('sub_type_1', '=', False),
+        ]])
+        domain = expression.OR([domain, [
+            '|', ('sub_type_2', 'in', self.sub_type_2.ids), ('sub_type_2', '=', False),
+        ]])
+        domain = expression.OR([domain, [
+            '|', ('sub_type_3', 'in', self.sub_type_3.ids), ('sub_type_3', '=', False),
+        ]])
+        domain = expression.OR([domain, [
+            '|', ('sub_type_4', 'in', self.sub_type_4.ids), ('sub_type_4', '=', False),
         ]])
         return domain
 
@@ -419,4 +427,16 @@ class HelpdeskSLA(models.Model):
     sub_type_1 = fields.Many2one(
         'support.extra.type',
         help="Only apply the SLA to a specific Sub Type 1. If left empty it will apply to all Sub Type 1."
+    )
+    sub_type_2 = fields.Many2one(
+        'support.extra.type',
+        help="Only apply the SLA to a specific Sub Type 1. If left empty it will apply to all Sub Type 2."
+    )
+    sub_type_3 = fields.Many2one(
+        'support.extra.type',
+        help="Only apply the SLA to a specific Sub Type 1. If left empty it will apply to all Sub Type 3."
+    )
+    sub_type_4 = fields.Many2one(
+        'support.extra.type',
+        help="Only apply the SLA to a specific Sub Type 1. If left empty it will apply to all Sub Type 4."
     )

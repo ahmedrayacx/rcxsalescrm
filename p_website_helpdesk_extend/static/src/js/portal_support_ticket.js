@@ -29,5 +29,6 @@ odoo.define('p_website_helpdesk_extend.support_ticket', function (require) {
             $("form.support-ticket #support_project_id option").addClass('d-none')
             $("form.support-ticket #support_project_id option[site_id='"+$(ev.currentTarget).val()+"']").removeClass('d-none')
         });
+        $("form.support-ticket input[name='team_id']:checked").trigger("change");
     });
 })

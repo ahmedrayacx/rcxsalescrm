@@ -336,6 +336,9 @@
                 <field name='ticket_type_id' position="after">
                     <field name="type_id" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
                     <field name="sub_type_1" domain="[('parent_id','=', type_id), ('parent_id','!=', False)]" context="{'show_short_name': True, 'default_parent_id': type_id}" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
+                    <field name="sub_type_2" domain="[('parent_id','=', sub_type_1), ('parent_id','!=', False)]" context="{'show_short_name': True, 'default_parent_id': sub_type_1}" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
+                    <field name="sub_type_3" domain="[('parent_id','=', sub_type_2), ('parent_id','!=', False)]" context="{'show_short_name': True, 'default_parent_id': sub_type_2}" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
+                    <field name="sub_type_4" domain="[('parent_id','=', sub_type_3), ('parent_id','!=', False)]" context="{'show_short_name': True, 'default_parent_id': sub_type_3}" options="{'no_create_edit': True, 'no_create': True}" invisible="not context.get('show_only_helpdesk', False)"/>
                 </field>
                 <field name='ticket_type_id' position="attributes">
                     <attribute name="invisible">context.get('show_only_helpdesk', False)</attribute>
