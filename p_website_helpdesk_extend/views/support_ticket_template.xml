@@ -207,5 +207,30 @@
                 </t>
             </field>
         </record>
+
+        <template id="tickets_followup" inherit_id="helpdesk.tickets_followup">
+            <xpath expr="//div[@name='description']" position="before">
+                <div class="row mb-4" t-if="ticket.type_id">
+                    <strong class="col-lg-2">Type</strong>
+                    <span class="col-lg-10" t-field="ticket.type_id"/>
+                </div>
+                <div class="row mb-4" t-if="ticket.sub_type_1">
+                    <strong class="col-lg-2">Sub-Type 1</strong>
+                    <span class="col-lg-10" t-field="ticket.sub_type_1"/>
+                </div>
+                <div class="row mb-4" t-if="ticket.sub_type_2">
+                    <strong class="col-lg-2">Sub-Type 2</strong>
+                    <span class="col-lg-10" t-field="ticket.sub_type_2"/>
+                </div>
+                <div class="row mb-4" t-if="ticket.sub_type_3">
+                    <strong class="col-lg-2">Sub-Type 3</strong>
+                    <span class="col-lg-10" t-field="ticket.sub_type_3"/>
+                </div>
+                <div class="row mb-4" t-if="ticket.sub_type_4">
+                    <strong class="col-lg-2">Sub-Type 4</strong>
+                    <span class="col-lg-10" t-field="ticket.sub_type_4"/>
+                </div>
+            </xpath>
+        </template>
     </data>
 </odoo>
