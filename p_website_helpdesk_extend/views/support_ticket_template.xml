@@ -210,6 +210,10 @@
 
         <template id="tickets_followup" inherit_id="helpdesk.tickets_followup">
             <xpath expr="//div[@name='description']" position="before">
+                <div class="row mb-4" t-if="ticket.sla_deadline">
+                    <strong class="col-lg-2">Due Date</strong>
+                    <span class="col-lg-10" t-field="ticket.sla_deadline" t-options='{"widget": "date"}'/>
+                </div>
                 <div class="row mb-4" t-if="ticket.type_id">
                     <strong class="col-lg-2">Type</strong>
                     <span class="col-lg-10" t-field="ticket.type_id"/>
