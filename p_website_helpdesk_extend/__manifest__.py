@@ -7,7 +7,7 @@
     'version': '15.0.1',
     'author': "Param Enterprice",
     'depends': [
-        'website', 'helpdesk'
+        'website', 'helpdesk', 'p_view_security'
     ],
     'description': """Portal Support""",
     'data': [

@@ -127,6 +127,7 @@ class SupportTypeFields(models.Model):
     parent_path = fields.Char(index=True)
 
     team_id = fields.Many2one('helpdesk.team')
+    role_ids = fields.Many2many('security.role', string="SSO Roles")
 
     @api.onchange('team_id', 'parent_id')
     def update_team_id(self):

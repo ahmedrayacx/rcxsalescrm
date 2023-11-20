@@ -159,6 +159,7 @@
                 <search>
                     <field name="name"/>
                     <field name="parent_id"/>
+                    <field name="team_id"/>
                     <separator/>
                     <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
                     <group expand="0" string="Group By">
@@ -166,6 +167,8 @@
                     </group>
                     <searchpanel>
                         <field name="parent_id" context="{'show_short_name': True}" string="Parent"
+                               enable_counters="1"/>
+                        <field name="team_id" string="Team"
                                enable_counters="1"/>
                     </searchpanel>
                 </search>
@@ -206,6 +209,7 @@
                                 <field name="team_id"
                                        attrs="{'invisible': [('parent_id', '!=',False)], 'required': [('parent_id', '=',False)]}"/>
                                 <field name="company_id"/>
+                                <field name="role_ids" widget="many2many_tags" domain="[('is_sso_role', '=', True)]"/>
                             </group>
                         </div>
                     </sheet>

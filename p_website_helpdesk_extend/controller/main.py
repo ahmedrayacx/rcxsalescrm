@@ -103,8 +103,14 @@ class WebsiteHelpdeskExtend(http.Controller):
             team_ids = request.env['helpdesk.team'].sudo().search_read([('is_helpdesk', '=', True)],
                                                             ['id', 'name', 'portal_color_code'])
         team_ids_ids = [i.get('id') for i in team_ids]
-        type_ids = request.env['support.extra.type'].sudo().search(
-                [('parent_id', '=', False), ('team_id', 'in', team_ids_ids)])
+        type_domain = [('parent_id', '=', False), ('team_id', 'in', team_ids_ids)]
+        sub_type_domain = []
+        if role_ids:
+            type_domain += [('role_ids', 'in', role_ids.ids)]
+            sub_type_domain += [('role_ids', 'in', role_ids.ids)]
+        type_ids = request.env['support.extra.type'].sudo().search(type_domain)
+        sub_type_domain += [('parent_id', 'in', type_ids.ids)]
+        sub_type_1_ids = request.env['support.extra.type'].sudo().search(sub_type_domain)
         vals = {
             'error': {},
             'error_message': [],
@@ -115,8 +121,7 @@ class WebsiteHelpdeskExtend(http.Controller):
             'type_ids': type_ids,
             'team_ids': team_ids,
             'form_action': '/support/ticket',
-            'sub_type_1_ids': request.env['support.extra.type'].sudo().search(
-                [('parent_id', 'in', type_ids.ids)]),
+            'sub_type_1_ids': sub_type_1_ids,
         }
         new_sub_type = []
         for sub_type in vals.get('sub_type_1_ids'):
